@@ -9,6 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@expo/webpack-config": "^18.0.1",
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/stack": "^6.3.16",
     "expo": "~48.0.15",
@@ -20,7 +21,8 @@
     "react-native": "0.71.7",
     "react-native-safe-area-context": "^4.5.2",
     "react-native-simple-select-button": "^0.0.6",
-    "react-native-web": "~0.18.10"
+    "react-native-web": "~0.18.10",
+    "yarn": "^1.22.19"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

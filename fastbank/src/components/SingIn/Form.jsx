@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useState } from 'react';
 import ClienteInfo from './ClienteInfo';
-import PersonalInfo from './ContactInfo';
-import OtherInfo from './AddressInfo';
+// import PersonalInfo from './ContactInfo';
+// import OtherInfo from './AddressInfo';
 import AddressInfo from './AddressInfo';
 import ContactInfo from './ContactInfo';
 import KindOfPerson from './KindOfPerson';
@@ -9,11 +10,12 @@ import PPInfo from './PPInfo';
 import LPInfo from './LPInfo';
 import api from '../../services/api';
 import ContaDataCreator from './ContaDataCreator';
+import { useNavigate } from 'react-router-dom';
 
 
 function Form() {
   const [page, setPage] = useState(0);
-
+  const rota = useNavigate()
   const FormTitles = ['Cliente Info', 'Address Infos', 'Contact Infos', 'Kind Of Person Infos', 'Other Infos'];
   const [formData, setFormData] = useState({
     //NAME
@@ -80,43 +82,8 @@ function Form() {
           alert(res.response.data)
 
         }
-
-
       })
   }
-  // const [formDataCliente, setFormDataCliente] = useState({
-  //   //NAME
-  //   nome_razaoSocial: "",
-  //   nomeSocial_fantasia: "",
-  //   data: '',
-  //   //KIND OF PERSON
-  //   kindOfPerson: "",
-  //   //PHYSICAL PERSON
-  //   cpf: "",
-  //   rg: "",
-  //   //LEGAL PERSON
-  //   cnpj: "",
-  //   inscricaoEstadual: "",
-  //   inscricaoMunicipal: "",
-  // });
-
-  // const [formDataContato, setFormDataContato] = useState({
-  //   //CONTACT
-  //   numero: "",
-  //   email: "",
-  //   observacao: "",
-
-  // });
-
-  // const [formDataEndereco, setFormDataEndereco] = useState({
-  //   //ADDRESS
-  //   logradouro: "",
-  //   bairro: "",
-  //   cidade: "",
-  //   uf: "",
-  //   cep: "",
-  //   complemento: "",
-  // });
 
   const PageDisplay = () => {
     if (page === 0) {
@@ -147,7 +114,7 @@ function Form() {
       return formData.logradouro && formData.bairro && formData.cidade && formData.uf && formData.cep;
     }
     else if (page === 2) {
-      return formData.numero && formData.email && formData.observacao;
+      return formData.numero && formData.email;
     }
     else if (page === 3) {
       return formData.kindOfPerson;
@@ -162,47 +129,52 @@ function Form() {
 
 
   return (
-    <div id="form" className="w-full flex items-center justify-center bg-green-500">
-      <div id="progressbar" className="h-4 bg-orange-500 flex items-center">
-        <div
-          style={{
-            width:
-              page === 0 ? "20%" : page === 1 ? "40%" : page === 2 ? "60%" : page === 3 ? "80%" : "100%",
-          }}
-          className="h-3 bg-black rounded-r-full"
-        ></div>
-      </div>
-      <div id="form-container" className="">
-        <div id="header" className="">
-          <h1>{FormTitles[page]}</h1>
-        </div>
-        <div id="body" className="">
-          {PageDisplay()}
-        </div>
-        <div id="footer" className="">
-          <button
-            className="border hover:bg-slate-400 m-1 disabled:hidden"
-            disabled={page === 0}
-            onClick={() => {
-              setPage((currPage) => currPage - 1);
+    <div className='flex justify-end'>
+      <div id="form" className="flex flex-col w-9/12 justify-center items-center h-screen bg-green-500">
+        <div id="progressbar" className="h-3 bg-orange-500 flex items-center w-full rounded-full">
+          <div
+            style={{
+              width:
+                page === 0 ? "20%" : page === 1 ? "40%" : page === 2 ? "60%" : page === 3 ? "80%" : "100%",
             }}
-          >
-            PREV
-          </button>
-          <button
-            className="border bg-slate-300 hover:bg-slate-400 m-1 disabled:bg-slate-900"
-            disabled={isNextDisabled}
-            onClick={() => {
-              if (page === FormTitles.length - 1) {
-                console.log(formData);
-                sendCliente()
-              } else {
-                setPage((currPage) => currPage + 1);
-              }
-            }}
-          >
-            {page === FormTitles.length - 1 ? "SUBMIT" : "NEXT"}
-          </button>
+            className="h-3 bg-black rounded-full"
+          ></div>
+        </div>
+        <div id="form-container" className="w-full h-4/6 bg-red-400 flex flex-col justify-between">
+          <div id="header" className="">
+            <h1>{FormTitles[page]}</h1>
+          </div>
+          <div id="body" className="">
+            {PageDisplay()}
+          </div>
+          <div id="footer" className="">
+            <button
+              className="border hover:bg-slate-400 m-1 disabled:hidden"
+              disabled={page === 0}
+              onClick={() => {
+                setPage((currPage) => currPage - 1);
+              }}
+            >
+              PREV
+            </button>
+            <button
+              className="border bg-slate-300 hover:bg-slate-400 m-1 disabled:bg-slate-900"
+              disabled={isNextDisabled}
+              onClick={() => {
+                if (page === FormTitles.length - 1) {
+                  console.log(formData);
+                  sendCliente()
+                  setTimeout(() => {
+                    rota("/")
+                  }, 2000);
+                } else {
+                  setPage((currPage) => currPage + 1);
+                }
+              }}
+            >
+              {page === FormTitles.length - 1 ? "SUBMIT" : "NEXT"}
+            </button>
+          </div>
         </div>
       </div>
     </div>
