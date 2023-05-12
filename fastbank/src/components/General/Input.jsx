@@ -12,7 +12,7 @@ const Input = ({ texto, tipo, obrigatorio, maxLength, act, valuei }) => {
     if (tipo == 'num' || tipo == Number) {
       const { value } = event.target;
       const onlyNums = value.replace(/[^0-9]/g, ""); // remove qualquer caractere que não seja número
-      if (value === onlyNums) { // verifica se o valor inserido é um número
+      if (value === onlyNums || value.includes("(")|| value.includes(")")|| value.includes("-") ) { // verifica se o valor inserido é um número
         if (value.length <= maxLength) {
           setInputValue(onlyNums);
           setErrorMsg("");
@@ -26,16 +26,16 @@ const Input = ({ texto, tipo, obrigatorio, maxLength, act, valuei }) => {
         }, 2000); // timer de 2 segundos para remover a mensagem de erro
       }
     }
-    if (tipo == 'email') {
+    else if (tipo == 'email') {
       const { value } = event.target;
 
       if (!value.includes("@")) {
         setErrorMsg("Invalid Email");
       }
 
-      if (!value.includes("gmail" || "yahoo" || ".com" || ".org" || ".edu" || "outlook")) {
-        setErrorMsg("Invalid Email");
-      }
+      // if (!value.includes("gmail" || "yahoo" || ".com" || ".org" || ".edu" || "outlook")) {
+      //   setErrorMsg("Invalid Email");
+      // }
       else {
         setErrorMsg("");
       }
@@ -52,6 +52,8 @@ const Input = ({ texto, tipo, obrigatorio, maxLength, act, valuei }) => {
     inputWidth = "w-16";
   } else if (maxLength === 7) {
     inputWidth = "w-28";
+  } else if (maxLength === 26 ) {
+    inputWidth = "w-36";
   } else if (maxLength === 1) {
     inputWidth = "w-8";
   } else {

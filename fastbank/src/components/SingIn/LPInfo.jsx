@@ -30,6 +30,13 @@ function LPInfo({formData, setFormData}) {
                 valuei={formData.inscricaoMunicipal}
                 act={(event) => setFormData({ ...formData, inscricaoMunicipal: event.target.value })} />
             
+            <Input
+                tipo={'password'}
+                texto={'Password...'}
+                maxLength={10}
+                required
+                valuei={formData.senha}
+                act={(event) => setFormData({ ...formData, senha: event.target.value })} />
         </div>
     );
 }

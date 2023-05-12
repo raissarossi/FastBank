@@ -1,14 +1,9 @@
+from django.urls import path
+from . import views
+from rest_framework.routers import DefaultRouter
 
-from django.contrib import admin
-from django.urls import path, include
-from django.conf.urls.static import static
-from django.conf import settings
+router = DefaultRouter()
 
+router.register('clientes', views.ClienteListarDetalhar)
 
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('bank/', include('adm.urls')),
-    path(r'auth/', include('djoser.urls')),
-    path(r'auth/', include('djoser.urls.jwt')),
-    # path('fastBank/', include('fastBank.urls')),
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns = [] + router.urls

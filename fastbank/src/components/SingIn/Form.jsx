@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import ClienteInfo from './ClienteInfo';
 // import PersonalInfo from './ContactInfo';
@@ -22,6 +22,7 @@ function Form() {
     nome_razaoSocial: "",
     nomeSocial_fantasia: "",
     data: "",
+    senha: "",
     //CONTACT
     numero: "",
     email: "",
@@ -45,7 +46,11 @@ function Form() {
 
   // GET -> loja/clientes?numero=99999999
   //SE RETORNAR 0 = NÃO EXISTE NENHUM CADASTRO COM ESSE NÚMERO
-
+  useEffect(()=>{
+    if (formData.email){
+      emailIsValid = true
+    }
+  }, [formData.email])
 
   const sendCliente = () => {
     api
@@ -53,6 +58,7 @@ function Form() {
         nome: formData.nome_razaoSocial,
         nomeSocial: formData.nomeSocial_fantasia,
         data_nascimento: formData.data,
+        senha: formData.senha,
         telefone: formData.numero,
         email: formData.email,
         observacao: formData.observacao,
@@ -87,40 +93,40 @@ function Form() {
 
   const PageDisplay = () => {
     if (page === 0) {
-      return <ClienteInfo formData={formData} setFormData={setFormData} />;
-    }
-    else if (page === 1) {
-      return <AddressInfo formData={formData} setFormData={setFormData} />;
-    }
-    else if (page === 2) {
-      return <ContactInfo formData={formData} setFormData={setFormData} />;
-    }
-    else if (page === 3) {
       return <KindOfPerson formData={formData} setFormData={setFormData} />;
     }
-    else if (page === 4 && formData.kindOfPerson == 'F') {
+    else if (page === 1 && formData.kindOfPerson == 'F') {
       return <PPInfo formData={formData} setFormData={setFormData} />;
     }
-    else if (page === 4 && formData.kindOfPerson == 'J') {
+    else if (page === 1 && formData.kindOfPerson == 'J') {
       return <LPInfo formData={formData} setFormData={setFormData} />;
+    }
+    else if (page === 2) {
+      return <ClienteInfo formData={formData} setFormData={setFormData} />;
+    }
+    else if (page === 3) {
+      return <AddressInfo formData={formData} setFormData={setFormData} />;
+    }
+    else if (page === 4) {
+      return <ContactInfo formData={formData} setFormData={setFormData} />;
     }
   };
 
   const checkInputs = () => {
     if (page === 0) {
-      return formData.nome_razaoSocial && formData.nomeSocial_fantasia && formData.data;
-    }
-    else if (page === 1) {
-      return formData.logradouro && formData.bairro && formData.cidade && formData.uf && formData.cep;
-    }
-    else if (page === 2) {
-      return formData.numero && formData.email;
-    }
-    else if (page === 3) {
       return formData.kindOfPerson;
     }
+    else if (page === 1) {
+      return (formData.rg && formData.cpf && formData.senha) || (formData.cnpj && formData.inscricaoEstadual && formData.inscricaoMunicipal && formData.senha);
+    }
+    else if (page === 2) {
+      return formData.nome_razaoSocial && formData.nomeSocial_fantasia && formData.data;
+    }
+    else if (page === 3) {
+      return formData.logradouro && formData.bairro && formData.cidade && formData.uf && formData.cep && formData.complemento;
+    }
     else if (page === 4) {
-      return (formData.rg && formData.cpf) || (formData.cnpj && formData.inscricaoEstadual && formData.inscricaoMunicipal);
+      return formData.numero && emailisvalid;
     }
     return false;
   };

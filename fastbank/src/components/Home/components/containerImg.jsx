@@ -1,7 +1,7 @@
-import Home01 from '../../Images/Home/home01.png'
-import Home02 from '../../Images/Home/home02.png'
-import Home03 from '../../Images/Home/home03.png'
-import Home04 from '../../Images/Home/home04.png'
+import Home01 from '../../../Images/Home/home01.png'
+import Home02 from '../../../Images/Home/home02.png'
+import Home03 from '../../../Images/Home/home03.png'
+import Home04 from '../../../Images/Home/home04.png'
 
 const ContainerImg = () => {
     return ( 

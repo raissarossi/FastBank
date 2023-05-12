@@ -1,44 +1,47 @@
+import axios from "axios";
 import Input from "../../General/Input";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const Forms = (props) => {
+const Forms = () => {
   const digitInput = useRef(null);
+  const [login, setLogin] = useState('');
+  const [senha, setSenha] = useState('');
+  const rota = useNavigate()
 
-  function handleAccountInput(event) {
-    const { value } = event.target;
-    if (value.length == 7) {
-      digitInput.current.focus();
-    }
+  const Logar = () => {
+    axios.post('http://127.0.0.1:8000/auth/jwt/create', {
+      CPF_CNPJ: login,
+      password: senha
+    }).then((response) => {
+      console.log(response)
+      localStorage.setItem('dados', JSON.stringify(response.data));
+      rota('/signup')
+    })
+      .catch((error) => console.log(error))
   }
 
   return (
-    <div className="bg-light-blue3 dark:bg-black">
-      <form className="bg-light-blue3 dark:bg-black flex items-center">
-        <Input
-          tipo={'num'}
-          obrigatorio={true}
-          texto={'Agency'}
-          maxLength={4}
-        />
-        <Input
-          tipo={'num'}
-          obrigatorio={true}
-          texto={'Account'}
-          maxLength={7}
-          onChange={handleAccountInput}
-        />
-        <h1 className="text-white">-</h1>
-        <Input
-          tipo={'num'}
-          obrigatorio={true}
-          texto={'Digit'}
-          maxLength={1}
-          ref={digitInput}
-        />
-        <button className="text-white">
-          <h1 className="border border-white rounded-lg ml-5 pl-2 pr-2 hover:border-2">OK</h1>
-        </button>
-      </form>
+    <div className="bg-light-blue3 dark:bg-black flex items-center">
+      <Input
+        tipo={'num'}
+        obrigatorio={true}
+        texto={'CPF / CNPJ'}
+        maxLength={26}
+        act={(event) => setLogin(event.target.value)}
+      />
+
+      <h1 className="text-white">-</h1>
+      <Input
+        tipo={'password'}
+        obrigatorio={true}
+        texto={'Password'}
+        maxLength={26}
+        act={(event) => setSenha(event.target.value)}
+      />
+      <button className="text-white" onClick={Logar}>
+        <h1 className="border border-white rounded-lg ml-5 pl-2 pr-2 hover:border-2">OK</h1>
+      </button>
     </div>
   )
 }

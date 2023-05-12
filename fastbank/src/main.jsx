@@ -21,6 +21,10 @@ const router = createBrowserRouter([
     element: <ContaData />,
   }
 ]);
+// const getToken = () =>{
+//   axios.post(LINK, {username: "admin", password: "admin"})
+// }
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
