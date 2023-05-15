@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Input from "../General/Input";
+import Input from "../../General/Input";
 
 function ContactInfo({ formData, setFormData }) {
 

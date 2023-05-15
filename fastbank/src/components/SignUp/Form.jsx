@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 // import { useState } from 'react';
-import ClienteInfo from './ClienteInfo';
-import AddressInfo from './AddressInfo';
-import ContactInfo from './ContactInfo';
-import KindOfPerson from './KindOfPerson';
-import PPInfo from './PPInfo';
-import LPInfo from './LPInfo';
+import ClienteInfo from './components/ClienteInfo';
+import AddressInfo from './components/AddressInfo';
+import ContactInfo from './components/ContactInfo';
+import KindOfPerson from './components/KindOfPerson';
+import PPInfo from './components/PPInfo';
+import LPInfo from './components/LPInfo';
 import retangulo1Light from '../../Images/Light/rectangle1Light.png';
 import retangulo2Light from '../../Images/Light/rectangle2Light.png';
 import retangulo1Dark from '../../Images/Dark/rectangle1Dark.png';

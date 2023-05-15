@@ -5,15 +5,12 @@ import rectangle3Light from '../../Images/Light/rectangle3Light.png'
 import ContainerImg from './components/containerImg';
 import Navbar from '../Header/Navbar'
 import Forms from '../Header/enter/forms'
+import Icons from './components/Icons';
+import Texts from './components/Texts';
 
 
 
 const Home = () => {
-    // useEffect(()=>{
-    //     api
-    //         .get("loja/clientes/")
-    //         .then((response)=> console.log(response.data))
-    // }, []);
     return (
         <>
             <Forms />
@@ -24,22 +21,20 @@ const Home = () => {
                 <ContainerImg />
                 <div className='pt-10 w-full'
                     data-aos="fade-up"
-                    // data-aos-delay="200"
-                    data-aos-duration="3000"
-                    // data-aos-easing="ease-in-out"
+                    data-aos-delay="400"
+                    data-aos-duration="900"
+                    data-aos-easing="ease-in-out"
                     data-aos-mirror="true"
                     data-aos-once="false"
-                    data-aos-anchor-placement="bottom-center">
-                    <div className='absolute flex-col lg:pt-20'>
+                >
+                    <div className='absolute flex-col lg:pt-20 w-full'>
                         <h1 className='mx-6 text-3xl ssm:text-4xl sm1:text-6xl md1:text-7xl lg1:text-8xl 2xl:text-9xl font-bold text-light-blue4 dark:text-white z-20 sm:pt-7'>Securing your financial</h1>
                         <h1 className='mx-6 text-3xl ssm:text-4xl sm1:text-6xl md1:text-7xl lg1:text-8xl 2xl:text-9xl font-bold text-light-blue4 dark:text-white z-20 sm:pt-7'>future, today.</h1>
-                    </div>
-                    {/* <div className='hidden 2xl:block absolute flex-col'>
-                        <h1 className='mx-6 text-3xl sm:text-5xl md:text-7xl lg:text-9xl font-bold text-white z-20 sm:pt-7'>Securing your financial</h1>
-                        <h1 className='mx-6 text-3xl sm:text-5xl md:text-7xl lg:text-9xl font-bold text-white z-20 sm:pt-7'>future, today.</h1>
-                    </div> */}
-                    {/* <h1 className='lg:hidden absolute mx-6 text-3xl sm:text-5xl md:text-7xl lg:text-9xl font-bold text-white z-20 sm:pt-7'>Securing your financial future, today.</h1> */}
+                        <div className=''>
+                            <Texts />
+                        </div>
 
+                    </div>
                     <img src={rectangle3Light} className='flex dark:hidden w-full z-10' />
                     <img src={rectangle3Dark} className='hidden dark:flex w-full z-10' />
 
