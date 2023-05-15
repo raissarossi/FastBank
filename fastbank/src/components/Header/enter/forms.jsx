@@ -22,25 +22,27 @@ const Forms = () => {
   }
 
   return (
-    <div className="bg-light-blue3 dark:bg-black flex items-center">
+    <div className="bg-light-blue3 dark:bg-black flex items-center p-2">
       <Input
+        sign="in"
         tipo={'num'}
         obrigatorio={true}
         texto={'CPF / CNPJ'}
-        maxLength={26}
+        maxLength={14}
         act={(event) => setLogin(event.target.value)}
       />
+      <h1 className="text-white p-2">-</h1>
 
-      <h1 className="text-white">-</h1>
       <Input
+        sign="in"
         tipo={'password'}
         obrigatorio={true}
         texto={'Password'}
-        maxLength={26}
+        maxLength={20}
         act={(event) => setSenha(event.target.value)}
       />
       <button className="text-white" onClick={Logar}>
-        <h1 className="border border-white rounded-lg ml-5 pl-2 pr-2 hover:border-2">OK</h1>
+        <h1 className="border border-white rounded-lg ml-5 px-2 hover:border-2">OK</h1>
       </button>
     </div>
   )

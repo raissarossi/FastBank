@@ -8,8 +8,8 @@ const Navbar = () => {
     const rota = useNavigate()
     return (
         <>
-            <div className='flex h-14 justify-between bg-gradient-to-r from-white -from-30% to-light-blue2 items-center dark:from-black dark:-from-30% dark:to-light-200'>
-                <div className='dark:hidden'>
+            <div className='flex h-14 justify-between bg-gradient-to-r from-white -from-30% to-light-blue2 items-center dark:from-black dark:from-20% dark:to-dark-blue3 px-1 sm:px-2'>
+                <div className='flex dark:hidden'>
                     <img src={logoB} alt="Logo" className='h-9' />
                 </div>
                 <div className='hidden dark:flex'>
@@ -17,7 +17,7 @@ const Navbar = () => {
                 </div>
                 <div className='flex'>
                     <ToggleTheme />
-                    <button onClick={() => { rota("/signup") }}>form</button>
+                    <button onClick={() => { rota("/signup") }} className='border px-2 my-2 rounded-lg text-white'>Sign Up</button>
                 </div>
             </div>
         </>

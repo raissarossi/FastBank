@@ -16,7 +16,24 @@ input[type=number] {
 
 @layer components{
   .forms{
-      @apply bg-purple-600 flex flex-col w-full;
+      @apply flex flex-col w-full justify-between items-center h-full;
       
+  }
+  .btnSignUpNext{
+    @apply 
+    /* LIGHT MODE */
+    bg-light-blue2 hover:bg-light-blue3 disabled:bg-light-blue_grey1 px-3 py-1 sm:px-5 sm:py-2 rounded-xl text-white
+    /* DARK MODE */
+    dark:bg-dark-blue2 dark:hover:bg-dark-blue3 dark:disabled:bg-dark-blue_grey2 dark:text-white
+  }
+  .btnSignUpBack{
+    @apply 
+    /* LIGHT MODE */
+    border border-light-blue4 text-light-blue4 hover:border-light-blue_grey1 px-3 py-1 sm:px-5 sm:py-2 disabled:bg-transparent disabled:border-none disabled:text-transparent rounded-xl
+    /* DARK MODE */
+    dark:border-white dark:text-white dark:hover:border-dark-blue_grey1 dark:disabled:bg-transparent dark:disabled:border-none dark:disabled:text-transparent
+  }
+  .title1{
+    @apply text-xl md:text-2xl lg:text-3xl font-bold text-light-blue4 dark:text-white pl-2
   }
 }

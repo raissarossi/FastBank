@@ -9,7 +9,7 @@ class Cliente(AbstractUser):
         (JURIDICO,'Pessoa Jurídica'),
     ]
     USERNAME_FIELD = 'CPF_CNPJ'
-    REQUIRED_FIELDS = ['nome', 'username' 'email', 'data_nascimento', 'telefone','cep','complemento', 'type_person', 'password']
+    REQUIRED_FIELDS = ['nome', 'username', 'email', 'data_nascimento', 'telefone','cep','complemento', 'type_person', 'password']
 
 
     nome = models.CharField(max_length=100)

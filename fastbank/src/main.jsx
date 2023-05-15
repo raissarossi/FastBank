@@ -4,8 +4,8 @@ import './index.css'
 import { createBrowserRouter, RouterProvider, } from "react-router-dom";
 import "./index.css";
 import Home from './components/Home/Home.jsx';
-import Form from './components/SingIn/Form.jsx';
-import ContaData from './components/SingIn/ContaDataCreator';
+import Form from './components/SignUp/Form.jsx';
+import ContaData from './components/SignUp/ContaDataCreator';
 
 const router = createBrowserRouter([
   {

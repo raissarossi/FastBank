@@ -10,8 +10,10 @@ export default {
     extend: {
       colors: {
         light: {
-          grey: '#A0AAB2',
-          blue_grey: '#8DB0CF',
+          grey1: '#A0AAB2',
+          grey2: '#EDEDED',
+          blue_grey1: '#8DB0CF',
+          blue_grey2: '#F2F9FF',
           blue1: '#469DE3',
           blue2: '#0072CE',
           blue3: '#004B8C',
@@ -20,7 +22,9 @@ export default {
         dark: {
           grey1: '#A0AAB2',
           grey2: '#414950',
-          blue_grey: '#3D5B76',
+          grey3: '#0F0F0F',
+          blue_grey1: '#3D5B76',
+          blue_grey2: '#213546',
           blue1: '#469DE3',
           blue2: '#0072CE',
           blue3: '#004B8C',
@@ -29,6 +33,17 @@ export default {
           blue6: '#00192F',
         },
       },
+      screens: {
+        'ssm': '440px',
+        'sm': '640px',
+        'sm1': '700px',
+        'md': '768px',
+        'md1': '830px',
+        'lg': '1024px',
+        'lg1': '1100px',
+        'xl': '1280px',
+        '2xl': '1536px',
+      }
     },
   },
   plugins: [],
