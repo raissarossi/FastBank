@@ -1,7 +1,7 @@
-import axios from "axios";
 import Input from "../../General/Input";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import api from "../../../services/api";
 
 const Forms = () => {
   const digitInput = useRef(null);
@@ -10,13 +10,13 @@ const Forms = () => {
   const rota = useNavigate()
 
   const Logar = () => {
-    axios.post('http://127.0.0.1:8000/auth/jwt/create', {
+    api.post('auth/jwt/create', {
       CPF_CNPJ: login,
       password: senha
     }).then((response) => {
       console.log(response)
       localStorage.setItem('dados', JSON.stringify(response.data));
-      rota('/signup')
+      rota('/infossignin')
     })
       .catch((error) => console.log(error))
   }

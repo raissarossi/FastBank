@@ -4,7 +4,7 @@ import logoW from '../../Images/Logo/logoW.png';
 import ToggleTheme from './ToggleTheme';
 
 
-const Navbar = () => {
+const Navbar = ({exibirBotao}) => {
     const rota = useNavigate()
     return (
         <>
@@ -17,7 +17,11 @@ const Navbar = () => {
                 </div>
                 <div className='flex'>
                     <ToggleTheme />
+                    {exibirBotao ? 
                     <button onClick={() => { rota("/signup") }} className='border px-2 my-2 rounded-lg text-white'>Sign Up</button>
+                    : null
+                    }
+                    
                 </div>
             </div>
         </>

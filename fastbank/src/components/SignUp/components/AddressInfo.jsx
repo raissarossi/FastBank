@@ -33,13 +33,6 @@ function AddressInfo({ formData, setFormData }) {
                 console.log(formData);
             })
     }
-    // const consumirAPI = () => {
-    //     axios.get(`https://cdn.apicep.com/file/apicep/${cep}.json`)
-    //         .then(({data}) => {
-    //             setFormData({ ...formData, logradouro: data.address, uf:data.state, bairro:data.district, cidade: data.city })
-    //             console.log(formData);
-    //         })
-    // }
 
     return (
         <div id='other-info-container' className='forms'>

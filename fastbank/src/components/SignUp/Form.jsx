@@ -149,72 +149,72 @@ function Form() {
       <div className='z-50 absolute'>
         <ToggleTheme />
       </div>
-      <div className='absolute w-full left-0 -top-1 z-20'>
-        <img src={retangulo1Light} className='dark:hidden' />
-        <img src={retangulo1Dark} className='hidden dark:flex' />
-      </div>
-      <div className='absolute w-full left-0 -top-1 z-10'>
-        <img src={retangulo2Light} className='dark:hidden' />
-        <img src={retangulo2Dark} className='hidden dark:flex' />
-      </div>
+      <>
+        <div className='absolute w-full left-0 -top-1 z-20'>
+          <img src={retangulo1Light} className='dark:hidden' />
+          <img src={retangulo1Dark} className='hidden dark:flex' />
+        </div>
+        <div className='absolute w-full left-0 -top-1 z-10'>
+          <img src={retangulo2Light} className='dark:hidden' />
+          <img src={retangulo2Dark} className='hidden dark:flex' />
+        </div>
+      </>
       <div className='flex justify-center h-screen items-center  sm:justify-end'>
         <div id="form" className="flex flex-col z-30 justify-between items-center h-5/6 bg-white p-5 rounded-3xl w-10/12 dark:bg-black dark:text-white
         sm:rounded-l-[50px] sm:rounded-r-none sm:w-6/12 sm:h-screen sm:px-10 sm:py-36">
-
-          <div id="header" className='w-full flex flex-col h-1/6'>
-            <div id="progressbar" className="h-3 flex items-center w-full rounded-full bg-light-blue_grey1 dark:bg-dark-blue_grey2">
-              <div
-                style={{
-                  width:
-                    page === 0 ? "20%" : page === 1 ? "40%" : page === 2 ? "60%" : page === 3 ? "80%" : "100%",
-                }}
-                className="h-3 rounded-full bg-light-blue2 dark:bg-dark-blue2"
-              ></div>
-            </div>
-            <div id="title" className="pt-4 sm:pt-10">
-              <h1 className='title1'>{FormTitles[page]}</h1>
-            </div>
-          </div>
-
-          <div id="form-container" className="w-full mt-3 sm:mt-4 h-full flex flex-col justify-between">
-            <div id="body">
-              {PageDisplay()}
-            </div>
-            <div className='flex flex-col items-center'>
-              <div id="footer" className="flex items-center justify-between w-full">
-                <button
-                  className="btnSignUpBack"
-                  disabled={page === 0}
-                  onClick={() => {
-                    setPage((currPage) => currPage - 1);
-                  }}
-                >
-                  BACK
-                </button>
-                <button
-                  className="btnSignUpNext"
-                  disabled={isNextDisabled}
-                  onClick={() => {
-                    if (page === FormTitles.length - 1) {
-                      console.log(formData);
-                      // sendCliente()
-                      setTimeout(() => {
-                        rota("/")
-                      }, 2000);
-                    } else {
-                      setPage((currPage) => currPage + 1);
-                    }
-                  }}
-                >
-                  {page === FormTitles.length - 1 ? "SUBMIT" : "NEXT"}
-                </button>
+          <>
+            <div id="header" className='w-full flex flex-col h-1/6'>
+              <>
+                <div id="progressbar" className="h-3 flex items-center w-full rounded-full bg-light-blue_grey1 dark:bg-dark-blue_grey2">
+                  <div
+                    style={{
+                      width:
+                        page === 0 ? "20%" : page === 1 ? "40%" : page === 2 ? "60%" : page === 3 ? "80%" : "100%",
+                    }}
+                    className="h-3 rounded-full bg-light-blue2 dark:bg-dark-blue2" />
+                </div>
+              </>
+              <div id="title" className="pt-4 sm:pt-10">
+                <h1 className='title1'>{FormTitles[page]}</h1>
               </div>
+            </div>
+          </>
+          <>
+            <div id="form-container" className="w-full mt-3 sm:mt-4 h-full flex flex-col justify-between">
+              <div id="body">
+                {PageDisplay()}
+              </div>
+              <div className='flex flex-col items-center'>
+                <div id="footer" className="flex items-center justify-between w-full">
+                  <>
+                    <button
+                      className="btnSignUpBack" disabled={page === 0}
+                      onClick={() => { setPage((currPage) => currPage - 1); }}
+                    >BACK</button>
+                  </>
+                  <>
+                    <button className="btnSignUpNext" disabled={isNextDisabled}
+                      onClick={() => {
+                        if (page === FormTitles.length - 1) {
+                          console.log(formData);
+                          // sendCliente()
+                          setTimeout(() => {
+                            rota("/")
+                          }, 2000);
+                        } else {
+                          setPage((currPage) => currPage + 1);
+                        }
+                      }}
+                    >{page === FormTitles.length - 1 ? "SUBMIT" : "NEXT"}</button>
+                  </>
+                </div>
                 <div className='flex pt-3 mt-2 sm:mt-8 text-sm sm:text-lg lg:text-xl' >
                   <h2 className='p-1'>Already have an account?</h2>
                   <button className='p-1 text-dark-blue1' onClick={() => { rota("/") }}>Sign In</button>
                 </div>
+              </div>
             </div>
-          </div>
+          </>
         </div>
       </div>
     </div>

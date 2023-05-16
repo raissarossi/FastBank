@@ -15,9 +15,9 @@ input[type=number] {
 
 
 @layer components{
+  /* SING UP */
   .forms{
-      @apply flex flex-col w-full justify-between items-center h-full;
-      
+      @apply flex flex-col w-full justify-between items-center h-full;   
   }
   .btnSignUpNext{
     @apply 
@@ -35,5 +35,32 @@ input[type=number] {
   }
   .title1{
     @apply text-xl md:text-2xl lg:text-3xl font-bold text-light-blue4 dark:text-white pl-2
+  }
+
+  /* HOME */
+  .card-text-home{
+    @apply flex w-full ssm:mt-5 md:mt-10 xl:mt-16 items-center pl-5 md:p-5 lg:p-10
+  }
+  .texts-home{
+    @apply h-20 pl-5 hidden md:flex flex-col justify-center
+  }
+  .texts-hom{
+    @apply h-20 pl-5 md:hidden flex justify-center items-center text-light-blue4 dark:text-white
+  }
+  .texts-homee{
+    @apply h-20 pl-5 flex-col justify-center
+  }
+
+  .h1-home{
+    @apply font-bold text-lg md:text-2xl lg:text-4xl xl:text-6xl text-light-blue4 dark:text-white  
+  }
+  
+  .h2-home{
+    @apply font-light text-lg lg:text-xl xl:text-2xl text-light-blue4 dark:text-white
+  }
+
+  /* SIGN IN */
+  .table-head{
+    @apply w-1/3 px-6 py-3 text-xs font-bold text-left dark:text-light-blue4 text-white uppercase mr-1 bg-light-blue3 
   }
 }

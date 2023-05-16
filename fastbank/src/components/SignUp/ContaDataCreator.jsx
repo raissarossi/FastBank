@@ -36,8 +36,7 @@ function ContaDataCreator(cliente){
     }
 
     const createAccount = () => {
-        api
-          .post("bank/conta/", {
+        api.post("bank/conta/", {
             cliente: conta.cliente, 
             agencia: conta.agencia, 
             numero: conta.numero, 

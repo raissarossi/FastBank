@@ -6,6 +6,8 @@ import "./index.css";
 import Home from './components/Home/Home.jsx';
 import Form from './components/SignUp/Form.jsx';
 import ContaData from './components/SignUp/ContaDataCreator';
+import InfosSignIn from './components/HomeSignIn/InfosSignIn';
+import Navbar from './components/Header/Navbar';
 
 const router = createBrowserRouter([
   {
@@ -19,6 +21,10 @@ const router = createBrowserRouter([
   {
     path: "/conta",
     element: <ContaData />,
+  },
+  {
+    path: "/infossignin",
+    element: <InfosSignIn />,
   }
 ]);
 // const getToken = () =>{

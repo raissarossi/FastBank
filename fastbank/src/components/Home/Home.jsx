@@ -5,7 +5,6 @@ import rectangle3Light from '../../Images/Light/rectangle3Light.png'
 import ContainerImg from './components/containerImg';
 import Navbar from '../Header/Navbar'
 import Forms from '../Header/enter/forms'
-import Icons from './components/Icons';
 import Texts from './components/Texts';
 
 
