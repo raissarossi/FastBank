@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, Button, Image, TouchableOpacity, TextInput, View } from 'react-native';
+import { Text, Button, Image, Pressable, TextInput, View } from 'react-native';
 import { styled } from 'nativewind';MaterialIcons
 import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
@@ -36,33 +36,33 @@ export default function Start({ navigation }) {
                         </View>
 
                         <View className={'flex items-center flex-row justify-evenly'}>
-                            <TouchableOpacity onPress={() => navigation.navigate('Home')} className={'bg-black w-1/4 h-12 rounded-full flex justify-center items-center'}>
+                            <Pressable onPress={() => navigation.navigate('Login')} className={'bg-black w-1/4 h-12 rounded-full flex justify-center items-center'}>
                                 <Text className={'text-white'}>Login</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={() => navigation.navigate('Create')} className={'bg-black w-1/4 h-12 rounded-full flex justify-center items-center'}>
+                            </Pressable>
+                            <Pressable onPress={() => navigation.navigate('Create')} className={'bg-black w-1/4 h-12 rounded-full flex justify-center items-center'}>
                                 <Text className={'text-white'}>Create</Text>
-                            </TouchableOpacity>
+                            </Pressable>
                         </View>
                     </View>
 
                     <View className={'bg-black w-full mt-4'}>
                         <View className={'flex justify-around flex-row m-3'}>
                             <View className={'border-2 border-white rounded-lg'}>
-                                <TouchableOpacity title='key' onPress={() => navigation.navigate('Transferencias', { title: 'Security Key' })} >
+                                <Pressable title='key' onPress={() => navigation.navigate('Transferencias', { title: 'Security Key' })} >
                                     <IconsI name="lock-closed-outline" size={24} className={'p-9 text-white'} />
-                                </TouchableOpacity>
+                                </Pressable>
                             </View>
 
                             <View className={'border-2 border-white  rounded-lg'}>
-                                <TouchableOpacity onPress={() => navigation.navigate('Transferencias', { title: 'Bar Code' })} >
+                                <Pressable onPress={() => navigation.navigate('Transferencias', { title: 'Bar Code' })} >
                                     <IconsI name="ios-barcode-outline" size={24} className={'p-9 text-white'} />
-                                </TouchableOpacity>
+                                </Pressable>
                             </View>
 
                             <View className={'border-2 border-white  rounded-lg'}>
-                                <TouchableOpacity onPress={() => navigation.navigate('Transferencias', { title: 'PIX' })} >
+                                <Pressable onPress={() => navigation.navigate('Transferencias', { title: 'PIX' })} >
                                     <Image source={require('../../components/img/logoPix.png')} className={'h-5 w-5 m-9'}/>
-                                </TouchableOpacity>
+                                </Pressable>
                             </View>
                         </View>
                     </View>

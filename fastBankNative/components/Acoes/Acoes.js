@@ -12,7 +12,7 @@ const AcoesBtn = () => {
     const navigation = useNavigation();
     return (
 
-        <View className={"flex flex-row flex-wrap overflow-hidden justify-evenly content-between py-10 bg-purple-600"}>
+        <View className={"flex flex-row flex-wrap overflow-hidden justify-evenly content-between py-10"}>
             <Btns icon={
                 <Ionicons name="card-outline" size={24} color="black" />
             }
