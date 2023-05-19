@@ -53,7 +53,6 @@ class Cliente(AbstractUser):
     uf = models.CharField(max_length=2)
     cep = models.CharField(max_length=10)
     complemento = models.CharField(max_length=100)
-
     type_person = models.CharField(max_length=1, choices=TYPES)
    
     def __str__(self) -> str:
@@ -87,7 +86,32 @@ class Conta(models.Model):
 
 class Movimentacao(models.Model):
     conta = models.ForeignKey(Conta, on_delete=models.CASCADE)
-    tipo = models.CharField(max_length=1)# PIX TRANFERENCIA PAGAMENTO
+    tipo = models.CharField(max_length=1) # PIX TRANFERENCIA PAGAMENTO
     valor = models.DecimalField(max_digits=10, decimal_places=2)
     destinatario = models.CharField(max_length=100)
     data = models.DateTimeField(auto_now_add=True)
+
+
+class Investimento(models.Model):
+    conta = models.ForeignKey(Conta, on_delete=models.CASCADE)
+    valor = models.DecimalField(max_digits=10, decimal_places=2)
+    prazo = models.DateTimeField(auto_now_add=True)    
+    saldoInvestido = models.DecimalField(max_digits=10, decimal_places=2)
+    local = models.CharField(max_length=50)
+    finalizado = models.BooleanField(default=False)
+
+class Emprestimo(models.Model):
+    conta = models.ForeignKey(Conta, on_delete=models.PROTECT)
+    valor =  models.DecimalField(max_digits=10, decimal_places=2)
+    juros = models.DecimalField(max_digits=10, decimal_places=2)
+    data = models.DateTimeField(auto_now_add=True)
+    aprovado = models.BooleanField(default=False)
+    observacao = models.CharField(max_length=100, blank=True)
+
+
+class Parcelas(models.Model):
+    emprestimo = models.ForeignKey(Emprestimo, on_delete=models.PROTECT)
+    vezes = models.IntegerField(default=1)
+    valorParcela = models.DecimalField(max_digits=10, decimal_places=2)
+    dataPagamento = models.DateField()
+    valorPago = models.DecimalField(max_digits=10, decimal_places=2)
