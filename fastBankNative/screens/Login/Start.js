@@ -36,11 +36,8 @@ export default function Start({ navigation }) {
                         </View>
 
                         <View className={'flex items-center flex-row justify-evenly'}>
-                            <Pressable onPress={() => navigation.navigate('Login')} className={'bg-black w-1/4 h-12 rounded-full flex justify-center items-center'}>
-                                <Text className={'text-white'}>Login</Text>
-                            </Pressable>
-                            <Pressable onPress={() => navigation.navigate('Create')} className={'bg-black w-1/4 h-12 rounded-full flex justify-center items-center'}>
-                                <Text className={'text-white'}>Create</Text>
+                            <Pressable onPress={() => navigation.navigate('Home')} className={'bg-black w-1/4 h-12 rounded-full flex justify-center items-center'}>
+                                <Text className={'text-white'}>Access</Text>
                             </Pressable>
                         </View>
                     </View>

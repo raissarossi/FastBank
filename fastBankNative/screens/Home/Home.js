@@ -1,18 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, Button, Image, TouchableOpacity, TextInput, View, Switch } from 'react-native';
 import { styled } from 'nativewind';
 import Navbar from '../../components/Navbar/Navbar';
-import { MaterialIcons } from '@expo/vector-icons';
-import AcoesBtn from '../../components/Acoes/Acoes';
-import { isEnabled } from 'react-native/Libraries/Performance/Systrace';
+import AcoesBtn from "../../components/Acoes/AcoesBtn"
+import Verificacao from '../../components/services/verificacao';
 import Icon from 'react-native-vector-icons/Feather';
+import { MaterialIcons } from '@expo/vector-icons';
+// import { isEnabled } from 'react-native/Libraries/Performance/Systrace';
 
 
 export default function Home({ navigation }) {
-    const MaterialIconss = styled(MaterialIcons)
+    useEffect(() => {
+        Verificacao(navigation);
+    },[])
 
+    const MaterialIconss = styled(MaterialIcons)
     const Saldo = 1234567.89
     const [showSaldo, setShowSaldo] = useState(false)
+
     return (
         <View>
             <Navbar />

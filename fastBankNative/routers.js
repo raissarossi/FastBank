@@ -14,20 +14,20 @@ export default function Routers({ navigation }) {
         <NavigationContainer>
             <Pilha.Navigator screenOptions={{ headerShown: false }}>
                 <Pilha.Screen
-                    name="Home"
-                    component={Home}
-                />
-                <Pilha.Screen
-                    name="Login"
-                    component={Login}
+                    name="Transferencias"
+                    component={Transferencias}
                 />
                 <Pilha.Screen
                     name="Start"
                     component={Start}
                 />
                 <Pilha.Screen
-                    name="Transferencias"
-                    component={Transferencias}
+                    name="Login"
+                    component={Login}
+                />
+                <Pilha.Screen
+                    name="Home"
+                    component={Home}
                 />
 
             </Pilha.Navigator>
