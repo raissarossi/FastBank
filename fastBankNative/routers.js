@@ -4,14 +4,18 @@ import Start from "./screens/Login/Start";
 import Login from "./screens/Login/Login";
 import Home from "./screens/Home/Home";
 import Transferencias from "./screens/Transferencias/Transferencias"
+import Navbar from "./components/Navbar/Navbar";
+import { useState } from "react";
 
 
 const Pilha = createStackNavigator()
 
 
-export default function Routers({ navigation }) {
+export default function Routers() {
+    const [navbar, setNavbar]=useState(true)
     return (
         <NavigationContainer>
+            {/* {navbar==true?<Navbar /> : <></>} */}
             <Pilha.Navigator screenOptions={{ headerShown: false }}>
                 <Pilha.Screen
                     name="Transferencias"
@@ -34,3 +38,4 @@ export default function Routers({ navigation }) {
         </NavigationContainer>
     )
 }
+
