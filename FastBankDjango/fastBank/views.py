@@ -4,7 +4,7 @@ from .serializers import *
 from rest_framework import viewsets
 from rest_framework_simplejwt.tokens import AccessToken
 from rest_framework.permissions import IsAuthenticated
-
+import decimal
 
 class ClienteListarDetalhar(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
@@ -76,6 +76,25 @@ class MovimentacaoListarDetalhar(viewsets.ModelViewSet):
     # permission_classes = (IsAuthenticated,)
     queryset = Movimentacao.objects.all()
     serializer_class = MovimentacaoSerializer
+
+    def create(self, request, *args, **kwargs):
+        destinatario = Cliente.objects.get(CPF_CNPJ=request.data['chavePix'])
+        #pegar o token e obter o user_id
+        usuarioId = 1
+        conta_remetente = Conta.objects.get(cliente = usuarioId)
+
+        if conta_remetente is not None:
+            if conta_remetente.saldo >= decimal.Decimal(request.data['valor']):
+                conta_remetente.saldo -= decimal.Decimal(request.data['valor'])
+                conta_remetente.save()
+
+                conta_destinatario = Conta.objects.get(cliente=destinatario.id)
+                conta_destinatario.saldo += decimal.Decimal(request.data['valor'])
+                conta_destinatario.save()
+
+        request.data['destinatario'] = conta_destinatario.cliente__nome
+
+        return super().create(request, *args, **kwargs)
 
 class InvestimentoListarDetalhar(viewsets.ModelViewSet):
     # permission_classes = (IsAuthenticated,)

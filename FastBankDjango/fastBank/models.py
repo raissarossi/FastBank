@@ -24,7 +24,7 @@ class CustomUserManager(BaseUserManager):
         extra_fields.setdefault('is_superuser', True)
         return self.create_user(CPF_CNPJ, password, **extra_fields)
 
-class Cliente(AbstractUser):
+class Cliente(AbstractUser):   
     FISICO = 'F'
     JURIDICO='J'
     TYPES=[
@@ -85,7 +85,8 @@ class Conta(models.Model):
 
 
 class Movimentacao(models.Model):
-    conta = models.ForeignKey(Conta, on_delete=models.CASCADE)
+    conta = models.ForeignKey(Conta, on_delete=models.CASCADE, related_name="conta")
+    contaDestinatario = models.ForeignKey(Conta, on_delete=models.CASCADE, related_name="contaDestinatario")
     tipo = models.CharField(max_length=1) # PIX TRANFERENCIA PAGAMENTO
     valor = models.DecimalField(max_digits=10, decimal_places=2)
     destinatario = models.CharField(max_length=100)

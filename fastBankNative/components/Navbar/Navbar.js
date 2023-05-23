@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Image } from "react-native-web";
-import VoltarBtn from '../Voltarbtn/VoltarBtn';
+import VoltarBtn from '../General/VoltarBtn';
 
 
 const Navbar = () => {

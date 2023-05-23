@@ -4,22 +4,21 @@ import Start from "./screens/Login/Start";
 import Login from "./screens/Login/Login";
 import Home from "./screens/Home/Home";
 import Transferencias from "./screens/Transferencias/Transferencias"
-import Navbar from "./components/Navbar/Navbar";
 import { useState } from "react";
+import TelaTransf from "./screens/Transferencias/TelaTransf";
+import TelaValor from "./screens/Transferencias/TelaValor";
 
 
 const Pilha = createStackNavigator()
 
 
 export default function Routers() {
-    const [navbar, setNavbar]=useState(true)
     return (
         <NavigationContainer>
-            {/* {navbar==true?<Navbar /> : <></>} */}
             <Pilha.Navigator screenOptions={{ headerShown: false }}>
                 <Pilha.Screen
-                    name="Transferencias"
-                    component={Transferencias}
+                    name="TelaValor"
+                    component={TelaValor}
                 />
                 <Pilha.Screen
                     name="Start"
@@ -32,6 +31,15 @@ export default function Routers() {
                 <Pilha.Screen
                     name="Home"
                     component={Home}
+                />
+                <Pilha.Screen
+                    name="Transferencias"
+                    component={Transferencias}
+                />
+                <Pilha.Screen
+                    name="TelaTransf"
+                    component={TelaTransf}
+                    initialParams={{ title: 'pix' }}
                 />
 
             </Pilha.Navigator>

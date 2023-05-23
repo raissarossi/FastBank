@@ -3,6 +3,7 @@ import { TextInput, TouchableOpacity, View, Text } from "react-native-web";
 import { useContext, useState } from "react";
 import api from "../../components/services/api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Inputt from "../../components/General/Input";
 // import SimpleSelectButton from 'react-native-simple-select-button';
 // import { Ionicons } from '@expo/vector-icons';
 // import { Context } from "../../components/services/globalContext";
@@ -38,15 +39,17 @@ const Login = ({ navigation }) => {
                 <Image source={require('../../components/img/logob.png')} className={'w-72 h-14 ss:w-80 m-1'} />
             </View>
 
-            <View className='z-20 flex items-center w-4/5 justify-between h-2/5'>
+            <View className='z-20 flex items-center w-full justify-between h-2/5'>
                 <View className='w-full'>
-                    <View className='w-full'>
-                        <Text>CPF/CNPJ:</Text>
-                        <TextInput className='w-full h-12 rounded-xl border-2 border-light-grey z-20' placeholder="CPF / CNPJ" onChangeText={text => setCpf_cnpj(text)} require />
+                    <View className='w-full flex items-center'>
+                        <Text className="w-4/5">CPF/CNPJ:</Text>
+                        <Inputt texto="CPF / CNPJ..." onChangeText={text => setCpf_cnpj(text)} require />
+                        {/* <TextInput className='w-full h-12 rounded-xl border-2 border-light-grey z-20' placeholder="CPF / CNPJ" onChangeText={text => setCpf_cnpj(text)} require /> */}
                     </View>
-                    <View className='w-full pt-2'>
-                        <Text>Password:</Text>
-                        <TextInput className='w-full h-12 rounded-xl border-2 border-light-grey z-20' placeholder="Password" onChangeText={text => setSenha(text)} require />
+                    <View className='w-full flex items-center pt-5'>
+                        <Text className="w-4/5">Password:</Text>
+                        <Inputt texto="Password..." onChangeText={text => setSenha(text)} require />
+                        {/* <TextInput className='w-full h-12 rounded-xl border-2 border-light-grey z-20' placeholder="Password" onChangeText={text => setSenha(text)} require /> */}
                     </View>
                 </View>
 
