@@ -3,9 +3,9 @@ import { Text, Button, Image, TouchableOpacity, TextInput, View, Switch } from '
 import { styled } from 'nativewind';
 import Icon from 'react-native-vector-icons/Feather';
 import { MaterialIcons } from '@expo/vector-icons';
-const Saldo = ({ corText, tema }) => {
+const Saldo = ({ corText, tema, saldo }) => {
+    // const { user } = useSession(navigation)
     const MaterialIconss = styled(MaterialIcons)
-    const Saldo = 1234567.89
     const [showSaldo, setShowSaldo] = useState(false)
     let bg = ""
     if (tema == "white") {
@@ -24,7 +24,7 @@ const Saldo = ({ corText, tema }) => {
                 <MaterialIconss name="attach-money" size={20} className={corText} />
 
                 <View className="flex flex-row items-center">
-                    {showSaldo && <Text className={`h-7 rounded-md text-lg ${corText} px-1 mr-2`}>{Saldo}</Text>}
+                    {showSaldo && <Text className={`h-7 rounded-md text-lg ${corText} px-1 mr-2`}>{saldo}</Text>}
                     {!showSaldo && <View className={`h-7 w-20 ${bg} rounded-md mr-2`} />}
                     {showSaldo && (
                         <Icon name="eye" size={18} className={corText} onPress={() => setShowSaldo(!showSaldo)} />

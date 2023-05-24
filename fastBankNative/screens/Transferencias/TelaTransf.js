@@ -2,15 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Text, View, Pressable } from 'react-native';
 import VoltarBtn from '../../components/General/VoltarBtn';
 import Inputt from '../../components/General/Input';
+import { useSession } from '../../components/services/ApiToken';
 
 
 export default function TelaTransf({ navigation, route }) {
-    // useEffect(() => {
-    //     Verificacao(navigation);
-    // },[])
-
+    const {user} = useSession(navigation)
     const [key, setKey] = useState('')
-
     const { title, tipo } = route.params;
 
     useEffect(() => {

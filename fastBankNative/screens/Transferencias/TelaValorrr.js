@@ -5,8 +5,10 @@ import { useEffect, useState } from 'react';
 import ValorBtn from '../../components/Acoes/ValorBtn';
 import { TextInput } from 'react-native-web';
 import Saldo from '../../components/Acoes/Saldo';
+import { useSession } from '../../components/services/ApiToken';
 
-const TelaValor = () => {
+const TelaValor = ({navigation}) => {
+    const {user} = useSession(navigation)
     const [valor, setValor] = useState('')
     const Saldo = 10
     useEffect(() => {

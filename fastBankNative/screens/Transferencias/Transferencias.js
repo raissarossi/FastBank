@@ -3,14 +3,13 @@ import { Text, View, Pressable } from 'react-native';
 import Icons from '../../components/Icons/Icons';
 import { Ionicons } from '@expo/vector-icons';
 import Navbar from '../../components/Navbar/Navbar'
+import { useSession } from '../../components/services/ApiToken';
 
 export default function Transferencias({ navigation }) {
-
+    const {user} = useSession(navigation)
     // useEffect(() => {
     //     Verificacao(navigation);
     // },[])
-
-
     return (
         <View className={'h-full'}>
             {/* <Text>{title}</Text> */}

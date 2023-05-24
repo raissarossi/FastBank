@@ -5,8 +5,10 @@ import { useEffect, useState } from 'react';
 import ValorBtn from '../../components/Acoes/ValorBtn';
 import { TextInput } from 'react-native-web';
 import Saldo from '../../components/Acoes/Saldo';
+import { useSession } from '../../components/services/ApiToken';
 
-const TelaValor = () => {
+const TelaValor = ({navigation}) => {
+    const {user} = useSession(navigation)
     const [valor, setValor] = useState('')
     useEffect(() => {
         console.log(valor);
@@ -45,7 +47,7 @@ const TelaValor = () => {
             </View>
             <View className="w-full flex justify-center items-center pt-3">
                 <View className="w-4/5 flex items-end -mr-5">
-                    <Saldo corText={"text-black"} tema={"white"} />
+                    <Saldo corText={"text-black"} tema={"white"} saldo={user.conta.saldo} />
                 </View>
             </View>
             <View className="w-full flex items-center absolute bottom-16">
