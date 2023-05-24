@@ -17,10 +17,6 @@ export default function Routers() {
         <NavigationContainer>
             <Pilha.Navigator screenOptions={{ headerShown: false }}>
                 <Pilha.Screen
-                    name="TelaValor"
-                    component={TelaValor}
-                />
-                <Pilha.Screen
                     name="Start"
                     component={Start}
                 />
@@ -40,6 +36,10 @@ export default function Routers() {
                     name="TelaTransf"
                     component={TelaTransf}
                     initialParams={{ title: 'pix' }}
+                />
+                <Pilha.Screen
+                    name="TelaValor"
+                    component={TelaValor}
                 />
 
             </Pilha.Navigator>

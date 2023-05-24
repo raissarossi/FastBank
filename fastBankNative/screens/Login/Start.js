@@ -6,9 +6,9 @@ import Icons from '../../components/Icons/Icons';
 
 export default function Start({ navigation }) {
 
-    // const btAccess = () =>{
-    //     navigation.navigate('Home')
-    // }
+    const btAccess = () =>{
+        navigation.navigate('Home')
+    }
     return (
         <>
             <View className={"flex items-center h-full overflow-hidden w-full"}>

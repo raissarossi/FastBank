@@ -8,16 +8,18 @@ import Saldo from '../../components/Acoes/Saldo';
 
 const TelaValor = () => {
     const [valor, setValor] = useState('')
+    const Saldo = 10
     useEffect(() => {
         console.log(valor);
-        if (valor.length > 0) {
-            const formattedValor = valor.replace(/[^0-9]/g, "");
-            const formattedValor2 = parseFloat(formattedValor)
-            setValor(formattedValor2);
-        }
-        else if (valor.length == 0) {
-            setValor('')
-        }
+        // if (valor.length > 0) {
+        //     const formattedValor = valor.replace(/[^0-9]/g, "")
+        //     const formattedValor2 = parseFloat(formattedValor)
+        //     const formattedValor3 = (formattedValor2 * (0.01))
+        //     setValor(formattedValor3);
+        // }
+        // else if (valor.length == 0) {
+        //     setValor('')
+        // }
     }, [valor])
     return (
         <View className='h-full'>
@@ -29,13 +31,13 @@ const TelaValor = () => {
                 <View className='w-8 px-5 py-2 '></View>
             </View>
             <Text className="text-2xl font-semibold mt-14 mb-5 px-10">How Much?</Text>
-            <Inputt texto="$0,00" onChangeText={text => setValor(text)} value={valor} keyboardType="numeric" />
+            <Inputt texto="$0,00" onChangeText={text => setValor(text)} value={valor} keyboardType="numeric"/>
             <View className="flex justify-center items-center w-full py-5">
                 <View className="flex flex-row w-4/5 justify-between">
-                    <ValorBtn valor={1} onPress={() => setValor(valor + 1.00)} />
-                    <ValorBtn valor={10} onPress={() => setValor(valor + 10.00)} />
-                    <ValorBtn valor={50} onPress={() => setValor(valor + 50.00)} />
-                    <ValorBtn valor={100} onPress={() => setValor(valor + 100.00)} />
+                    <ValorBtn valor={1} onPress={() => setValor(valor + 1)} />
+                    <ValorBtn valor={10} onPress={() => setValor(valor + 10)} />
+                    <ValorBtn valor={50} onPress={() => setValor(valor + 50)} />
+                    <ValorBtn valor={100} onPress={() => setValor(valor + 100)} />
                 </View>
             </View>
             <Text className="text-2xl font-semibold mt-8 px-10">Description</Text>

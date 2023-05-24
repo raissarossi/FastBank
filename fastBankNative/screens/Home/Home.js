@@ -6,13 +6,16 @@ import AcoesBtn from "../../components/Acoes/AcoesBtn"
 import Verificacao from '../../components/services/verificacao';
 import Icon from 'react-native-vector-icons/Feather';
 import { MaterialIcons } from '@expo/vector-icons';
+import { useSession } from '../../components/services/ApiToken';
 // import { isEnabled } from 'react-native/Libraries/Performance/Systrace';
 
 
 export default function Home({ navigation }) {
+    const {user} = useSession(navigation)
     useEffect(() => {
         Verificacao(navigation);
     },[])
+    
 
     const MaterialIconss = styled(MaterialIcons)
     const Saldo = 1234567.89
@@ -33,7 +36,7 @@ export default function Home({ navigation }) {
                     <MaterialIconss name="attach-money" size={20} color="white" />
 
                     <View className="flex flex-row items-center">
-                        {showSaldo && <Text className={"h-7  bg-dark-blue_grey2  rounded-md text-lg text-white px-1 mr-2"}>{Saldo}</Text>}
+                        {showSaldo && <Text className={"h-7  bg-dark-blue_grey2  rounded-md text-lg text-white px-1 mr-2"}>{user.conta.saldo}</Text>}
                         {!showSaldo && <View className={"h-7 w-20 bg-dark-blue_grey2 opacity-60 rounded-md mr-2"} />}
                         {showSaldo && (
                             <Icon name="eye" size={18} color="#0072CE"  onPress={() => setShowSaldo(!showSaldo)} />

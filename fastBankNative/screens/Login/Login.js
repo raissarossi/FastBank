@@ -28,6 +28,7 @@ const Login = ({ navigation }) => {
         })
             .catch((error) => console.log(error))
     }
+    
     return (
         <View className='flex flex-col justify-evenly items-center h-full overflow-hidden'>
 
