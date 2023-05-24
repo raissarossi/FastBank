@@ -4,18 +4,15 @@ import VoltarBtn from "../../components/General/VoltarBtn";
 import { useEffect, useState } from 'react';
 import ValorBtn from '../../components/Acoes/ValorBtn';
 import { TextInput } from 'react-native-web';
-import Saldo from '../../components/Acoes/Saldo';
 
 const TelaValor = () => {
     const [valor, setValor] = useState('')
-    const Saldo = 10
     useEffect(() => {
         console.log(valor);
         if (valor.length > 0) {
-            const formattedValor = valor.replace(/[^0-9]/g, "")
+            const formattedValor = valor.replace(/[^0-9]/g, "");
             const formattedValor2 = parseFloat(formattedValor)
-            const formattedValor3 = (formattedValor2 * (0.01))
-            setValor(formattedValor3);
+            setValor(formattedValor2);
         }
         else if (valor.length == 0) {
             setValor('')
@@ -34,26 +31,15 @@ const TelaValor = () => {
             <Inputt texto="$0,00" onChangeText={text => setValor(text)} value={valor} />
             <View className="flex justify-center items-center w-full py-5">
                 <View className="flex flex-row w-4/5 justify-between">
-                    <ValorBtn valor={1} onPress={() => setValor(valor + 1)} />
-                    <ValorBtn valor={10} onPress={() => setValor(valor + 10)} />
-                    <ValorBtn valor={50} onPress={() => setValor(valor + 50)} />
-                    <ValorBtn valor={100} onPress={() => setValor(valor + 100)} />
+                    <ValorBtn valor={1} onPress={() => setValor(valor + 1.00)} />
+                    <ValorBtn valor={10} onPress={() => setValor(valor + 10.00)} />
+                    <ValorBtn valor={50} onPress={() => setValor(valor + 50.00)} />
+                    <ValorBtn valor={100} onPress={() => setValor(valor + 100.00)} />
                 </View>
             </View>
             <Text className="text-2xl font-semibold mt-8 px-10">Description</Text>
             <View className="w-full flex justify-center items-center">
-                <TextInput placeholder="Description" 
-                className='w-4/5 h-12 border-b-2 pl-2 placeholder:text-dark-grey1 placeholder:font-semibold placeholder:italic placeholder:text-xl '></TextInput>
-            </View>
-            <View className="w-full flex justify-center items-center pt-3">
-                <View className="w-4/5 flex items-end -mr-5">
-                    <Saldo corText={"text-black"} tema={"white"} />
-                </View>
-            </View>
-            <View className="w-full flex items-center absolute bottom-16">
-                <Pressable onPress={() => navigation.navigate('Transferencias')} className="bg-black w-4/5 h-10 flex items-center justify-center rounded-full">
-                    <Text className="text-white">Next</Text>
-                </Pressable>
+                <TextInput placeholder="Description" className='w-4/5 h-12 border-b-2 pl-2 placeholder:text-dark-grey1 placeholder:font-semibold placeholder:italic placeholder:text-xl '></TextInput>
             </View>
         </View>
     );
