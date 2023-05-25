@@ -8,11 +8,11 @@ import axios from 'axios';
 const InfosSignIn = () => {
     const rota = useNavigate()
     const { pathname } = useLocation();
-    // const [exibirBotao, setExibirBotao] = useState();
+    const [exibirBotao, setExibirBotao] = useState();
 
-    // if (pathname === '/infosignin'){
-    //     setExibirBotao(false)
-    // }
+    if (pathname === '/infosignin'){
+        setExibirBotao(false)
+    }
 
     useEffect(() => {
         let user = JSON.parse(localStorage.getItem("dados"))

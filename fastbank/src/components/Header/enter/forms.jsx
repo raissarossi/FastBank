@@ -22,27 +22,32 @@ const Forms = () => {
   }
 
   return (
-    <div className="bg-light-blue3 dark:bg-black flex items-center p-2">
-      <Input
-        sign="in"
-        tipo={'num'}
-        obrigatorio={true}
-        texto={'CPF / CNPJ'}
-        maxLength={14}
-        act={(event) => setLogin(event.target.value)}
-      />
-      <h1 className="text-white p-2">-</h1>
+    <div className="bg-light-blue3 dark:bg-black flex items-center p-2 justify-between">
+      <div className="flex">
+        <Input
+          sign="in"
+          tipo={'num'}
+          obrigatorio={true}
+          texto={'CPF / CNPJ'}
+          maxLength={14}
+          act={(event) => setLogin(event.target.value)}
+        />
+        <h1 className="text-white p-2">-</h1>
 
-      <Input
-        sign="in"
-        tipo={'password'}
-        obrigatorio={true}
-        texto={'Password'}
-        maxLength={20}
-        act={(event) => setSenha(event.target.value)}
-      />
-      <button className="text-white" onClick={Logar}>
-        <h1 className="border border-white rounded-lg ml-5 px-2 hover:border-2">OK</h1>
+        <Input
+          sign="in"
+          tipo={'password'}
+          obrigatorio={true}
+          texto={'Password'}
+          maxLength={20}
+          act={(event) => setSenha(event.target.value)}
+        />
+        <button className="text-white" onClick={()=>Logar()}>
+          <h1 className="border border-white rounded-lg ml-5 px-2 hover:border-2">OK</h1>
+        </button>
+      </div>
+      <button className="text-white" onClick={()=>rota('/signup')}>
+        <h1 className="border border-white rounded-lg ml-5 px-2 hover:border-2">Start an account</h1>
       </button>
     </div>
   )

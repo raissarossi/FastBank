@@ -3,7 +3,7 @@ import Input from "../../General/Input";
 
 function ContactInfo({ formData, setFormData }) {
 
-    const [phone, setPhone] = useState(formData.numero)
+    const [phone, setPhone] = useState(formData.telefone)
 
     useEffect(() => {
         // (xx)xxxxx-xxxx
@@ -16,7 +16,7 @@ function ContactInfo({ formData, setFormData }) {
                 setPhone(phone.replace("-", "").replace("(", "").replace(")", ""))
             }
         }
-        setFormData({ ...formData, numero: phone })
+        setFormData({ ...formData, telefone: phone })
     }, [phone])
 
     return (
@@ -27,9 +27,9 @@ function ContactInfo({ formData, setFormData }) {
                 texto={'Phone Number...'}
                 maxLength={11}
                 required
-                valuei={formData.numero}
+                valuei={formData.telefone}
                 act={(event) => {
-                    setFormData({ ...formData, numero: event.target.value });
+                    setFormData({ ...formData, telefone: event.target.value });
                     setPhone(event.target.value)
                 }} />
 
@@ -42,6 +42,17 @@ function ContactInfo({ formData, setFormData }) {
                 valuei={formData.email}
                 act={(event) => {
                     setFormData({ ...formData, email: event.target.value });
+                    console.log(event)
+                }} />
+            <Input
+                sign="up"
+                tipo={'text'}
+                texto={'Observation...'}
+                maxLength={100}
+                required
+                valuei={formData.observacao}
+                act={(event) => {
+                    setFormData({ ...formData, observacao: event.target.value });
                     console.log(event)
                 }} />
 

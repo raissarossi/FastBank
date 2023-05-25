@@ -11,24 +11,16 @@ function ClienteInfo({ formData, setFormData }) {
                 texto={'Complete Name...'}
                 maxLength={100}
                 required
-                valuei={formData.nome_razaoSocial}
-                act={(event) => setFormData({ ...formData, nome_razaoSocial: event.target.value })} />
-            <Input
-                sign="up"
-                tipo={'text'}
-                texto={'Nickname...'}
-                maxLength={100}
-                required
-                valuei={formData.nomeSocial_fantasia}
-                act={(event) => setFormData({ ...formData, nomeSocial_fantasia: event.target.value })} />
+                valuei={formData.nome}
+                act={(event) => setFormData({ ...formData, nome: event.target.value })} />
             <Input
                 sign="up"
                 tipo={'date'}
                 texto={'Date of Birth...'}
                 maxLength={10}
                 required
-                valuei={formData.data}
-                act={(event) => setFormData({ ...formData, data: event.target.value })} />
+                valuei={formData.dataNascimento}
+                act={(event) => setFormData({ ...formData, dataNascimento: event.target.value })} />
 
         </div>
     );

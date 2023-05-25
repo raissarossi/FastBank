@@ -4,7 +4,7 @@ import Input from "../../General/Input";
 function PPInfo({ formData, setFormData }) {
     // physical person
 
-    const [cpf, setCpf] = useState(formData.cpf)
+    const [cpf, setCpf] = useState(formData.cpf_cnpj)
     useEffect(() => {
         // xxx.xxx.xxx-xx
         console.log(cpf)
@@ -19,7 +19,7 @@ function PPInfo({ formData, setFormData }) {
                 setCpf(cpf.replace(".", "").replace("-", ""))
             }
         }
-        setFormData({ ...formData, cpf: cpf })
+        setFormData({ ...formData, cpf_cnpj: cpf })
     }, [cpf])
 
     const [rg, setRg] = useState(formData.rg)
@@ -45,9 +45,9 @@ function PPInfo({ formData, setFormData }) {
                 texto={'CPF...'}
                 maxLength={11}
                 required
-                valuei={formData.cpf}
+                valuei={formData.cpf_cnpj}
                 act={(event) => {
-                    setFormData({ ...formData, cpf: event.target.value });
+                    setFormData({ ...formData, cpf_cnpj: event.target.value });
                     setCpf(event.target.value)
                 }} />
 

@@ -13,6 +13,9 @@ class CustomUserManager(BaseUserManager):
         user = self.model(CPF_CNPJ=CPF_CNPJ, **extra_fields)
         user.set_password(password)
         user.save()
+        tipoPessoa = extra_fields.get('type_person')
+        # if tipoPessoa == 'F':
+        #     ClientePF.objects.create(cliente=)
         Conta.objects.create(cliente=user, agencia=numeros(3), numero=numeros(7), digito=numeros(1), saldo=saldo(), limite=1000)
         return user
 
@@ -60,7 +63,7 @@ class Cliente(AbstractUser):
 
 class ClientePF(models.Model):
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
-    rg = models.CharField(max_length=10)
+    rg = models.CharField(max_length=12)
 
     def __str__(self) -> str:
         return self.cliente

@@ -12,85 +12,65 @@ import retangulo2Light from '../../Images/Light/rectangle2Light.png';
 import retangulo1Dark from '../../Images/Dark/rectangle1Dark.png';
 import retangulo2Dark from '../../Images/Dark/rectangle2Dark.png';
 import ToggleTheme from '../Header/ToggleTheme';
+import api from '../../services/api';
 
 
 
 function Form() {
   const [page, setPage] = useState(0);
+  const [user, setUser] = useState("");
   const rota = useNavigate()
   const FormTitles = ['Kind Of Person Infos', 'Client Info', 'Client Info', 'Address Infos', 'Contact Infos'];
+
   const [formData, setFormData] = useState({
-    //KIND OF PERSON
-    kindOfPerson: "",
-    //PHYSICAL PERSON
-    cpf: "",
-    rg: "",
-    //LEGAL PERSON
-    cnpj: "",
-    inscricaoEstadual: "",
-    inscricaoMunicipal: "",
-    //NAME
-    nome_razaoSocial: "",
-    nomeSocial_fantasia: "",
-    data: "",
-    senha: "",
-    //CONTACT
-    numero: "",
+    nome: "",
+    dataNascimento: "",
+    telefone: "",
     email: "",
-    //ADDRESS
+    observacao: "",
     logradouro: "",
     bairro: "",
     cidade: "",
     uf: "",
     cep: "",
+    numero: "",
+    complemento: "",
+    kindOfPerson: "",
+    cpf_cnpj: "",
+
+    rg: "",
+    inscricaoEstadual: "",
+    inscricaoMunicipal: "",
+
+    senha: "",
   });
 
-  // GET -> loja/clientes?numero=99999999
-  //SE RETORNAR 0 = NÃO EXISTE NENHUM CADASTRO COM ESSE NÚMERO
-  // useEffect(()=>{
-  //   if (formData.email){
-  //     emailIsValid = true
-  //   }
-  // }, [formData.email])
-
-  // const sendCliente = () => {
-  //   api
-  //     .post("bank/clientes/", {
-  //       nome: formData.nome_razaoSocial,
-  //       nomeSocial: formData.nomeSocial_fantasia,
-  //       data_nascimento: formData.data,
-  //       senha: formData.senha,
-  //       telefone: formData.numero,
-  //       email: formData.email,
-  //       observacao: formData.observacao,
-  //       logradouro: formData.logradouro,
-  //       bairro: formData.bairro,
-  //       cidade: formData.cidade,
-  //       uf: formData.uf,
-  //       cep: formData.cep,
-  //       complemento: formData.complemento,
-  //       type_person: formData.kindOfPerson,
-  //       cpf: formData.cpf == "" ? null : formData.cpf,
-  //       rg: formData.rg == "" ? null : formData.rg,
-  //       cnpj: formData.cnpj == "" ? null : formData.cnpj,
-  //       inscricaoEstadual: formData.inscricaoEstadual == "" ? null : formData.inscricaoEstadual,
-  //       inscricaoMunicipal: formData.inscricaoMunicipal == "" ? null : formData.inscricaoMunicipal,
-
-  //     }).then(res => {
-  //       console.log(res);
-  //       if (res.status == 201) {
-  //         /*CRIAR CONTA*/
-  //         ContaDataCreator(res.data.id)
-  //         // <ContaDataCreator cliente={formData.nome}/>
-  //         alert("CONTA CRIADA COM SUCESSO \nSUA CONTA É: ")
-  //         /*REDIRECIONAMENTO*/
-
-  //       } else {
-  //         alert(res.response.data)
-
-  //       }
-  //     })
-  // }
+  const sendCliente = () => {
+    api.post("bank/clientes/", {
+        nome: formData.nome,
+        data_nascimento: formData.dataNascimento,
+        telefone: formData.telefone,
+        email: formData.email,
+        observacao: formData.observacao,
+        logradouro: formData.logradouro,
+        bairro: formData.bairro,
+        cidade: formData.cidade,
+        uf: formData.uf,
+        cep: formData.cep,
+        complemento: formData.complemento,
+        type_person: formData.kindOfPerson,
+        password: formData.senha,
+        CPF_CNPJ: formData.cpf_cnpj
+      }).then(res => {
+        console.log(res);
+        if (res.status == 201) {
+          alert("CONTA CRIADA COM SUCESSO")
+          setUser(res.data)
+        } else {
+          alert(res.response.data)
+        }
+      })
+  }
 
   const PageDisplay = () => {
     if (page === 0) {
@@ -118,30 +98,52 @@ function Form() {
       return formData.kindOfPerson;
     }
     else if (page === 1) {
-      if (formData.rg.length == 12 && formData.cpf.length == 14 || formData.cnpj.length == 18 && formData.inscricaoEstadual.length == 9 && formData.inscricaoMunicipal.length == 11) {
-        return (formData.rg && formData.cpf && formData.senha) || (formData.cnpj && formData.inscricaoEstadual && formData.inscricaoMunicipal && formData.senha);
+      if (formData.rg.length == 12 && formData.cpf_cnpj.length == 14 || formData.cpf_cnpj.length == 18 && formData.inscricaoEstadual.length == 9 && formData.inscricaoMunicipal.length == 11) {
+        return (formData.rg && formData.cpf_cnpj && formData.senha) || (formData.cpf_cnpj && formData.inscricaoEstadual && formData.inscricaoMunicipal && formData.senha);
       }
     }
     else if (page === 2) {
-      return formData.nome_razaoSocial && formData.nomeSocial_fantasia && formData.data;
+      return formData.nome && formData.dataNascimento;
     }
     else if (page === 3) {
       if (formData.cep.length == 9) {
-        return formData.logradouro && formData.bairro && formData.cidade && formData.uf && formData.cep && formData.complemento;
+        return formData.logradouro && formData.bairro && formData.cidade && formData.uf && formData.cep && formData.numero && formData.complemento;
       }
     }
     else if (page === 4) {
-      if (formData.numero.length == 14 && (/^\S+$/.test(formData.email) || formData.email == "")) {
-        return formData.numero || formData.email;
+      if (formData.telefone.length == 14 && (/^\S+$/.test(formData.email) || formData.email == "")) {
+        return formData.telefone || formData.email;
       }
-      else if (formData.numero == "" && (/^\S+$/.test(formData.email)) && formData.email.includes("@")) {
-        return formData.numero || formData.email;
+      else if (formData.telefone == "" && (/^\S+$/.test(formData.email)) && formData.email.includes("@")) {
+        return formData.telefone || formData.email;
       }
     }
     return false;
   };
   const isNextDisabled = !checkInputs();
 
+  useEffect(() => {
+    if (formData.kindOfPerson == 'J') {
+      api.post("bank/contaspj/", {
+        cliente: user.id,
+        inscricaoEstadual: formData.inscricaoEstadual,
+        inscricaoMunicipal: formData.inscricaoMunicipal,
+    }).then(res=>{
+      console.log(res)
+      alert("PJ CRIADO COM SUCESSO")
+    })
+    }
+    else if (formData.kindOfPerson == 'F') {
+      api.post("bank/contaspf/", {
+        cliente: user.id,
+        rg: formData.rg,
+    }).then(res=>{
+      console.log(res)
+      alert("PF CRIADO COM SUCESSO")
+    })
+    }
+
+  }, [user])
 
 
   return (
@@ -197,7 +199,7 @@ function Form() {
                       onClick={() => {
                         if (page === FormTitles.length - 1) {
                           console.log(formData);
-                          // sendCliente()
+                          sendCliente()
                           setTimeout(() => {
                             rota("/")
                           }, 2000);

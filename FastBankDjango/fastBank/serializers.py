@@ -13,6 +13,16 @@ class ContaSerializer(serializers.ModelSerializer):
         model = Conta
         fields = ('id','cliente','agencia','numero','digito','saldo','limite')
 
+class ClientePFSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ClientePF
+        fields = ('id','cliente','rg')
+
+class ClientePJSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ClientePJ
+        fields = ('id','cliente', 'inscricaoEstadual','inscricaoMunicipal')
+
 class MovimentacaoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movimentacao

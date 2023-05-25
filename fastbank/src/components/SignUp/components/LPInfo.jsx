@@ -3,7 +3,7 @@ import Input from "../../General/Input";
 
 function LPInfo({ formData, setFormData }) {
     // Legal Person
-    const [cnpj, setCnpj] = useState(formData.cnpj)
+    const [cnpj, setCnpj] = useState(formData.cpf_cnpj)
     useEffect(() => {
         // xx.xxx.xxx/xxxx-xx
         console.log(cnpj)
@@ -15,7 +15,7 @@ function LPInfo({ formData, setFormData }) {
                 setCnpj(cnpj.replace(".", "").replace("-", "").replace("/", ""))
             }
         }
-        setFormData({ ...formData, cnpj: cnpj })
+        setFormData({ ...formData, cpf_cnpj: cnpj })
     }, [cnpj])
 
     return (
@@ -26,9 +26,9 @@ function LPInfo({ formData, setFormData }) {
                 texto={'CNPJ...'}
                 maxLength={14}
                 required
-                valuei={formData.cnpj}
+                valuei={formData.cpf_cnpj}
                 act={(event) => {
-                    setFormData({ ...formData, cnpj: event.target.value });
+                    setFormData({ ...formData, cpf_cnpj: event.target.value });
                     setCnpj(event.target.value)
                 }} />
 

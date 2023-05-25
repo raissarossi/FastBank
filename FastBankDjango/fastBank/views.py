@@ -7,7 +7,7 @@ from rest_framework.permissions import IsAuthenticated
 import decimal
 
 class ClienteListarDetalhar(viewsets.ModelViewSet):
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
     queryset = Cliente.objects.all()
     serializer_class = ClienteSerializer
 
@@ -18,14 +18,14 @@ class ClienteListarDetalhar(viewsets.ModelViewSet):
         # QUEM FOI O AUTOR DO REQUEST???
         
 
-        token = request.META.get('HTTP_AUTHORIZATION', '').split(' ')[1]
-        print(token)
-        dados = AccessToken(token)
-        contaId = dados['user_id']
-        print(contaId)
-        conta = Conta.objects.get(cliente=int(contaId))
-        print(conta.cliente.nome)
-        print(conta.saldo)
+        # token = request.META.get('HTTP_AUTHORIZATION', '').split(' ')[1]
+        # print(token)
+        # dados = AccessToken(token)
+        # contaId = dados['user_id']
+        # print(contaId)
+        # conta = Conta.objects.get(cliente=int(contaId))
+        # print(conta.cliente.nome)
+        # print(conta.saldo)
         #QUEM FEZ A REQUISIÇÃO FOI O ID 1
 
 
@@ -57,6 +57,16 @@ class ClienteListarDetalhar(viewsets.ModelViewSet):
         #                 mov2.save()
         # return super().create(request, *args, **kwargs)
 
+class ClientePFListarDetalhar(viewsets.ModelViewSet):
+    # permission_classes = (IsAuthenticated,)
+    queryset = ClientePF.objects.all()
+    serializer_class = ClientePFSerializer
+
+class ClientePJListarDetalhar(viewsets.ModelViewSet):
+    # permission_classes = (IsAuthenticated,)
+    queryset = ClientePJ.objects.all()
+    serializer_class = ClientePJSerializer
+
 class ContaListarDetalhar(viewsets.ModelViewSet):
     # permission_classes = (IsAuthenticated,)
     queryset = Conta.objects.all()
@@ -78,6 +88,18 @@ class MovimentacaoListarDetalhar(viewsets.ModelViewSet):
     serializer_class = MovimentacaoSerializer
 
     def create(self, request, *args, **kwargs):
+
+        #=============================================NESSE ESPAÇO AKI=============================================#
+        #=============================================NESSE ESPAÇO AKI=============================================#
+        #=============================================NESSE ESPAÇO AKI=============================================#
+
+
+
+
+
+        #=============================================NESSE ESPAÇO AKI=============================================#
+        #=============================================NESSE ESPAÇO AKI=============================================#
+        #=============================================NESSE ESPAÇO AKI=============================================#
         destinatario = Cliente.objects.get(CPF_CNPJ=request.data['chavePix'])
         #pegar o token e obter o user_id
         usuarioId = 1

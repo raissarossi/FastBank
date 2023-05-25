@@ -19,7 +19,7 @@ function AddressInfo({ formData, setFormData }) {
             }
         }
         if (cep.length <= 0) {
-            setFormData({ ...formData, logradouro: '', uf: '', bairro: '', cidade: '', complemento: '' })
+            setFormData({ ...formData, logradouro: '', uf: '', bairro: '', cidade: '', numero: '', complemento: '' })
         }
 
     }, [cep])
@@ -35,7 +35,7 @@ function AddressInfo({ formData, setFormData }) {
     }
 
     return (
-        <div id='other-info-container' className='forms'>
+        <div id='other-info-container' className='forms pb-5'>
             <Input
                 sign="up"
                 tipo={'num'}
@@ -85,15 +85,26 @@ function AddressInfo({ formData, setFormData }) {
                 required
                 valuei={formData.uf}
                 act={(event) => setFormData({ ...formData, uf: event.target.value })} />
+            
+            <div className='flex justify-between w-11/12'>
+                <Input
+                    sign="up"
+                    tipo={'num'}
+                    texto={'Number...'}
+                    maxLength={10}
+                    required
+                    valuei={formData.numero}
+                    act={(event) => setFormData({ ...formData, numero: event.target.value })} />
 
-            <Input
-                sign="up"
-                tipo={'text'}
-                texto={'Complement...'}
-                maxLength={100}
-                required
-                valuei={formData.complemento}
-                act={(event) => setFormData({ ...formData, complemento: event.target.value })} />
+                <Input
+                    sign="up"
+                    tipo={'text'}
+                    texto={'Complement...'}
+                    maxLength={100}
+                    required
+                    valuei={formData.complemento}
+                    act={(event) => setFormData({ ...formData, complemento: event.target.value })} />
+            </div>
 
         </div>
     );

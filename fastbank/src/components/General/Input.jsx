@@ -55,6 +55,8 @@ const Input = ({ texto, tipo, obrigatorio, maxLength, act, valuei, sign }) => {
     inputWidth = "w-36";
   } else if (maxLength === 1) {
     inputWidth = "w-8";
+  } else if (texto == 'Number...' || texto == 'Complement...') {
+    inputWidth = "w-5/5";
   } else {
     inputWidth = "w-full";
   }
