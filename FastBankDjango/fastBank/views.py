@@ -6,6 +6,18 @@ from rest_framework_simplejwt.tokens import AccessToken
 from rest_framework.permissions import IsAuthenticated
 import decimal
 
+# PROXIMOS PASSOS
+
+# CRIAR CARTAO -- MOSTRAR
+# EMPRESTIMOS --  FORMULA
+
+
+
+
+
+
+
+
 class ClienteListarDetalhar(viewsets.ModelViewSet):
     # permission_classes = (IsAuthenticated,)
     queryset = Cliente.objects.all()
@@ -83,7 +95,7 @@ class ContaVerify(viewsets.ListaView):
 """
 
 class MovimentacaoListarDetalhar(viewsets.ModelViewSet):
-    # permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated,)
     queryset = Movimentacao.objects.all()
     serializer_class = MovimentacaoSerializer
 
@@ -93,28 +105,46 @@ class MovimentacaoListarDetalhar(viewsets.ModelViewSet):
         #=============================================NESSE ESPAÇO AKI=============================================#
         #=============================================NESSE ESPAÇO AKI=============================================#
 
+        token = request.META.get('HTTP_AUTHORIZATION', '').split(' ')[1]
+        print(token)
+        remetente = AccessToken(token)
+        contaRemetenteId = remetente['user_id']
 
-
-
+        conta_remetente = Conta.objects.get(cliente=int(contaRemetenteId))
 
         #=============================================NESSE ESPAÇO AKI=============================================#
         #=============================================NESSE ESPAÇO AKI=============================================#
         #=============================================NESSE ESPAÇO AKI=============================================#
-        destinatario = Cliente.objects.get(CPF_CNPJ=request.data['chavePix'])
-        #pegar o token e obter o user_id
-        usuarioId = 1
-        conta_remetente = Conta.objects.get(cliente = usuarioId)
+        print(request.data)
+        # #pegar o token e obter o user_id
+        # print("dest :",destinatario)
+        conta_destinatario = Conta.objects.get(chavePix=request.data['chavePix'])
+        destinatario = conta_destinatario.cliente
 
-        if conta_remetente is not None:
-            if conta_remetente.saldo >= decimal.Decimal(request.data['valor']):
-                conta_remetente.saldo -= decimal.Decimal(request.data['valor'])
-                conta_remetente.save()
+        if conta_destinatario is None:
+            raise serializers.ValidationError('destinatario nao exist')
+        if conta_remetente is None:
+            raise serializers.ValidationError('remetente nao exist')
+        if conta_remetente.saldo <= decimal.Decimal(request.data['valor']):
+            raise serializers.ValidationError('Saldo is not suficiente')
+        
+        conta_remetente.saldo -= decimal.Decimal(request.data['valor'])
+        conta_remetente.save()
+        
+        conta_destinatario.saldo += decimal.Decimal(request.data['valor'])
+        conta_destinatario.save()
 
-                conta_destinatario = Conta.objects.get(cliente=destinatario.id)
-                conta_destinatario.saldo += decimal.Decimal(request.data['valor'])
-                conta_destinatario.save()
+        _mutable = request.data._mutable
 
-        request.data['destinatario'] = conta_destinatario.cliente__nome
+        # set to mutable
+        request.data._mutable = True
+        request.data['conta'] = contaRemetenteId
+        request.data['destinatario'] = destinatario.nome
+        request.data._mutable = _mutable
+        # print("EESSEE :"+request.data['contaDestinatario']+" : "+contaRemetenteId)
+
+        if contaRemetenteId == conta_destinatario.id:
+            raise serializers.ValidationError('conta e destinatario sao os mesmos')
 
         return super().create(request, *args, **kwargs)
 

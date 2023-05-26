@@ -4,7 +4,7 @@ from .sorteador import numeros, saldo
 
 class CustomUserManager(BaseUserManager):
 
-    def create_user(self, CPF_CNPJ, password=None, **extra_fields):
+    def create_user(self, CPF_CNPJ, password, **extra_fields):
         """
         Cria e salva um usuário com o CPF e senha fornecidos.
         """
@@ -16,10 +16,10 @@ class CustomUserManager(BaseUserManager):
         tipoPessoa = extra_fields.get('type_person')
         # if tipoPessoa == 'F':
         #     ClientePF.objects.create(cliente=)
-        Conta.objects.create(cliente=user, agencia=numeros(3), numero=numeros(7), digito=numeros(1), saldo=saldo(), limite=1000)
+        Conta.objects.create(cliente=user, agencia=numeros(3), numero=numeros(7), digito=numeros(1), saldo=saldo(), limite=1000, chavePix=extra_fields.get('email'))
         return user
 
-    def create_superuser(self, CPF_CNPJ, password=None, **extra_fields):
+    def create_superuser(self, CPF_CNPJ, password, **extra_fields):
         """
         Cria e salva um superusuário com o CPF_CNPJ e senha fornecidos.
         """
@@ -83,13 +83,13 @@ class Conta(models.Model):
     digito = models.IntegerField()
     saldo = models.DecimalField(max_digits=20, decimal_places=2)
     limite = models.DecimalField(max_digits=20, decimal_places=2)
-    # updated_at = models.DateTimeField(auto_now=True)
-    # ativa = models.BooleanField(default=False)
+    chavePix = models.CharField(max_length=100, unique=True)
+
 
 
 class Movimentacao(models.Model):
     conta = models.ForeignKey(Conta, on_delete=models.CASCADE, related_name="conta")
-    contaDestinatario = models.ForeignKey(Conta, on_delete=models.CASCADE, related_name="contaDestinatario")
+    chavePix = models.CharField(max_length=100)
     tipo = models.CharField(max_length=1) # PIX TRANFERENCIA PAGAMENTO
     valor = models.DecimalField(max_digits=10, decimal_places=2)
     destinatario = models.CharField(max_length=100)

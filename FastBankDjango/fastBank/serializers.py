@@ -26,7 +26,7 @@ class ClientePJSerializer(serializers.ModelSerializer):
 class MovimentacaoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movimentacao
-        fields = ('id','conta','tipo', 'valor','destinatario','data')
+        fields = ('id','conta','chavePix','tipo','valor','destinatario','data')
 
 class InvestimentoSerializer(serializers.ModelSerializer):
     class Meta:

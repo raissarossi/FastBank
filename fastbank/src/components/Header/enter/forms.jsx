@@ -1,5 +1,5 @@
 import Input from "../../General/Input";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../../services/api";
 
@@ -21,6 +21,19 @@ const Forms = () => {
       .catch((error) => console.log(error))
   }
 
+  useEffect(() => {
+      // xxx.xxx.xxx-xx
+      console.log(login)
+      if (login.length == 11) {
+          setLogin(login.substring(0, 3) + '.' + login.substring(3, 6) + '.' + login.substring(6, 9) + '-' + login.substring(9, 11))
+      }
+      if (login.length < 14) {
+          if (login.includes(".") || login.includes("-")) {
+              setLogin(login.replace(".", "").replace("-", ""))
+          }
+      }
+  }, [login])
+
   return (
     <div className="bg-light-blue3 dark:bg-black flex items-center p-2 justify-between">
       <div className="flex">
@@ -30,6 +43,7 @@ const Forms = () => {
           obrigatorio={true}
           texto={'CPF / CNPJ'}
           maxLength={14}
+          valuei={login}
           act={(event) => setLogin(event.target.value)}
         />
         <h1 className="text-white p-2">-</h1>
@@ -40,6 +54,7 @@ const Forms = () => {
           obrigatorio={true}
           texto={'Password'}
           maxLength={20}
+          valuei={senha}
           act={(event) => setSenha(event.target.value)}
         />
         <button className="text-white" onClick={()=>Logar()}>

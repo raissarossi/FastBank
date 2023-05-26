@@ -46,7 +46,7 @@ function Form() {
   });
 
   const sendCliente = () => {
-    api.post("bank/clientes/", {
+    api.post("/auth/users/", {
         nome: formData.nome,
         data_nascimento: formData.dataNascimento,
         telefone: formData.telefone,

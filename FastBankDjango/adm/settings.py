@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-rik%c8%cw#z-)3fx@2+94idnbk^vdpv4@ff@qcl7b)32y9d2l&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 AUTH_USER_MODEL = 'fastBank.Cliente'
 
@@ -141,11 +141,12 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ),
+REST_FRAMEWORK={
+'DEFAULT_AUTHENTICATION_CLASSES': [
+    'rest_framework_simplejwt.authentication.JWTAuthentication',
+],
 }
+
 SIMPLE_JWT = {
    'AUTH_HEADER_TYPES': ('JWT',),
 }
