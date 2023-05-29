@@ -52,6 +52,12 @@ export default function TelaTransf({ navigation, route }) {
 
     }, [key])
 
+    // const verificarKey = () =>{
+    //     api.get("auth/users/"){
+    //         if(key)
+    //     }.then((res)=>{})
+    // }
+
     return (
         <View className='h-full'>
             <View className="flex flex-row bg-black items-center justify-between pt-10 pb-6">
@@ -82,7 +88,7 @@ export default function TelaTransf({ navigation, route }) {
                 </>
             }
             <View className="w-full flex items-center absolute bottom-16">
-                <Pressable onPress={() => navigation.navigate('TelaValor', { title: {title}, tipo: {tipo} })} className="bg-black w-4/5 h-10 flex items-center justify-center rounded-full">
+                <Pressable onPress={() => {(navigation.navigate('TelaValor', { title: {title}, tipo: {tipo} }),(verificarKey()))}} className="bg-black w-4/5 h-10 flex items-center justify-center rounded-full">
                     <Text className="text-white">Next</Text>
                 </Pressable>
             </View>

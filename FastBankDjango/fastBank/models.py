@@ -16,7 +16,7 @@ class CustomUserManager(BaseUserManager):
         tipoPessoa = extra_fields.get('type_person')
         # if tipoPessoa == 'F':
         #     ClientePF.objects.create(cliente=)
-        Conta.objects.create(cliente=user, agencia=numeros(3), numero=numeros(7), digito=numeros(1), saldo=saldo(), limite=1000, chavePix=extra_fields.get('email'))
+        Conta.objects.create(cliente=user, agencia=numeros(3), numero=numeros(7), digito=numeros(1), saldo=saldo(), limite=1000, chavePix=extra_fields.get('email'), cartaoD={"S"}, cartaoC={"S"})
         return user
 
     def create_superuser(self, CPF_CNPJ, password, **extra_fields):
@@ -77,6 +77,14 @@ class ClientePJ(models.Model):
         return self.cliente
 
 class Conta(models.Model):
+    DEBITO='D'
+    CREDITO = 'C'
+    SEM = 'S'
+    TYPES=[
+        (DEBITO,'Debito'),
+        (CREDITO,'Credito'),
+        (SEM,'Sem'),
+    ]
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     agencia = models.IntegerField()
     numero = models.IntegerField()
@@ -84,6 +92,8 @@ class Conta(models.Model):
     saldo = models.DecimalField(max_digits=20, decimal_places=2)
     limite = models.DecimalField(max_digits=20, decimal_places=2)
     chavePix = models.CharField(max_length=100, unique=True)
+    cartaoD = models.CharField(max_length=1, choices=TYPES)
+    cartaoC = models.CharField(max_length=1, choices=TYPES)
 
 
 

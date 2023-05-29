@@ -7,6 +7,8 @@ import Transferencias from "./screens/Transferencias/Transferencias"
 import { useState } from "react";
 import TelaTransf from "./screens/Transferencias/TelaTransf";
 import TelaValor from "./screens/Transferencias/TelaValor";
+import MeusCartoes from "./screens/Cartoes/MeusCartoes";
+import SolicitarCartao from "./screens/Cartoes/SolicitarCartao";
 
 
 const Pilha = createStackNavigator()
@@ -16,6 +18,14 @@ export default function Routers() {
     return (
         <NavigationContainer>
             <Pilha.Navigator screenOptions={{ headerShown: false }}>
+                <Pilha.Screen
+                    name="SolicitarCartao"
+                    component={SolicitarCartao}
+                />
+                <Pilha.Screen
+                    name="MeusCartoes"
+                    component={MeusCartoes}
+                />
                 <Pilha.Screen
                     name="Home"
                     component={Home}

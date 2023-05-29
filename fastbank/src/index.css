@@ -20,7 +20,7 @@ input[type=number] {
       @apply flex flex-col w-full justify-between items-center h-full;   
   }
   .btnSignUpNext{
-    @apply 
+    @apply  
     /* LIGHT MODE */
     bg-light-blue2 hover:bg-light-blue3 disabled:bg-light-blue_grey1 px-3 py-1 sm:px-5 sm:py-2 rounded-xl text-white
     /* DARK MODE */
