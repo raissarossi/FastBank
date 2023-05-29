@@ -9,5 +9,6 @@ router.register('contas', views.ContaListarDetalhar)
 router.register('contaspf', views.ClientePFListarDetalhar)
 router.register('contaspj', views.ClientePJListarDetalhar)
 router.register('movimentacao', views.MovimentacaoListarDetalhar)
+router.register('cartoes', views.CartoesListarDetalhar)
 
 urlpatterns = [] + router.urls

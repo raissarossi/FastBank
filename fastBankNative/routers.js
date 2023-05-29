@@ -19,12 +19,12 @@ export default function Routers() {
         <NavigationContainer>
             <Pilha.Navigator screenOptions={{ headerShown: false }}>
                 <Pilha.Screen
-                    name="SolicitarCartao"
-                    component={SolicitarCartao}
-                />
-                <Pilha.Screen
                     name="MeusCartoes"
                     component={MeusCartoes}
+                />
+                <Pilha.Screen
+                    name="SolicitarCartao"
+                    component={SolicitarCartao}
                 />
                 <Pilha.Screen
                     name="Home"

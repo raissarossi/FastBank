@@ -1,4 +1,4 @@
-import { Pressable, View, Text } from "react-native-web";
+import { Pressable, View, Text } from "react-native";
 import Navbar from "../../components/Navbar/Navbar";
 import { useState } from "react";
 import Step0 from "./Solicitacao/step0";

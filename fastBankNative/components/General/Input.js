@@ -1,4 +1,4 @@
-import { TextInput, View } from "react-native-web";
+import { TextInput, View } from "react-native";
 
 const Inputt = ({ texto, onChangeText, value, max, keyboardType }) => {
     return (

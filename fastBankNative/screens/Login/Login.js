@@ -1,5 +1,5 @@
 import { Button, Image, Pressable } from "react-native";
-import { TextInput, TouchableOpacity, View, Text } from "react-native-web";
+import { TextInput, TouchableOpacity, View, Text } from "react-native";
 import { useContext, useState } from "react";
 import api from "../../components/services/api";
 import AsyncStorage from "@react-native-async-storage/async-storage";

@@ -1,4 +1,4 @@
-import { Pressable, View, Text } from "react-native-web";
+import { Pressable, View, Text } from "react-native";
 import Navbar from "../../components/Navbar/Navbar";
 import { useState } from "react";
 import Step0 from "./Solicitacao/step0";
@@ -12,18 +12,18 @@ const SolicitarCartao = ({ navigation }) => {
 
     const [formCard, setFormCard] = useState({
         cartaoD: false,
-        cartaoC: false
+        cartaoC: false,
     })
 
     const PageDisplay = () => {
         if (page === 0) {
-            return <Step2 />
+            return <Step0 />
         }
         else if (page === 1) {
             return <Step1 formCard={formCard} setFormCard={setFormCard}/>
         }
         else if (page === 2) {
-            return <Step2 />
+            return <Step2 formCard={formCard} setFormCard={setFormCard}/>
         }
         else if (page === 3) {
             return <Step3 />
@@ -37,6 +37,12 @@ const CheckInput = () => {
         if(formCard.cartaoD==true || formCard.cartaoC==true){
             return true
         }
+    }
+    if (page === 2 ){
+        return true
+    }
+    if (page === 3 ){
+        return true
     }
         return false
     

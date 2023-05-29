@@ -1,9 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
-from .sorteador import numeros, saldo
+from .sorteador import numeros, saldo, cartao
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
 
 class CustomUserManager(BaseUserManager):
-
     def create_user(self, CPF_CNPJ, password, **extra_fields):
         """
         Cria e salva um usuário com o CPF e senha fornecidos.
@@ -16,7 +18,7 @@ class CustomUserManager(BaseUserManager):
         tipoPessoa = extra_fields.get('type_person')
         # if tipoPessoa == 'F':
         #     ClientePF.objects.create(cliente=)
-        Conta.objects.create(cliente=user, agencia=numeros(3), numero=numeros(7), digito=numeros(1), saldo=saldo(), limite=1000, chavePix=extra_fields.get('email'), cartaoD={"S"}, cartaoC={"S"})
+        Conta.objects.create(cliente=user, agencia=numeros(3), numero=numeros(7), digito=numeros(1), saldo=saldo(), limite=1000, chavePix=extra_fields.get('email'))
         return user
 
     def create_superuser(self, CPF_CNPJ, password, **extra_fields):
@@ -77,14 +79,6 @@ class ClientePJ(models.Model):
         return self.cliente
 
 class Conta(models.Model):
-    DEBITO='D'
-    CREDITO = 'C'
-    SEM = 'S'
-    TYPES=[
-        (DEBITO,'Debito'),
-        (CREDITO,'Credito'),
-        (SEM,'Sem'),
-    ]
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     agencia = models.IntegerField()
     numero = models.IntegerField()
@@ -92,9 +86,21 @@ class Conta(models.Model):
     saldo = models.DecimalField(max_digits=20, decimal_places=2)
     limite = models.DecimalField(max_digits=20, decimal_places=2)
     chavePix = models.CharField(max_length=100, unique=True)
-    cartaoD = models.CharField(max_length=1, choices=TYPES)
-    cartaoC = models.CharField(max_length=1, choices=TYPES)
 
+class Cartoes(models.Model):
+    DEBITO = 'd'
+    CREDITO = 'c'
+    CREBITO = 'b'
+    CARTOESLISTA = (
+        (DEBITO, "Debito"),
+        (CREDITO, "Credito"),
+        (CREBITO, "Crebito")
+    )
+    conta = models.ForeignKey(Conta, on_delete=models.CASCADE)
+    tipo = models.CharField(max_length=1, choices=CARTOESLISTA, default=CREBITO)
+    numero= models.CharField(max_length=20, default="", unique=True)
+    bandeira = models.CharField(max_length=1, default='R')
+    
 
 
 class Movimentacao(models.Model):

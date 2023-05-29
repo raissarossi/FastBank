@@ -18,6 +18,11 @@ class ClientePFSerializer(serializers.ModelSerializer):
         model = ClientePF
         fields = ('id','cliente','rg')
 
+class CartoesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Cartoes
+        fields =('id', 'conta', 'tipo', 'numero', 'bandeira')
+
 class ClientePJSerializer(serializers.ModelSerializer):
     class Meta:
         model = ClientePJ

@@ -1,4 +1,4 @@
-import { Image, View } from "react-native-web";
+import { Image, View } from "react-native";
 
 const Step0 = () => {
     return ( 

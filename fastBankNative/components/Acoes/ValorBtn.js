@@ -1,4 +1,4 @@
-import { Pressable, View, Text } from "react-native-web";
+import { Pressable, View, Text } from "react-native";
 
 
 const ValorBtn = ({ valor, onPress }) => {

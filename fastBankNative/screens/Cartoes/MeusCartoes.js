@@ -1,4 +1,4 @@
-import { View, Text } from "react-native-web"
+import { View, Text } from "react-native"
 import Navbar from "../../components/Navbar/Navbar";
 import Cartao from "./Cartao";
 

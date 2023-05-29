@@ -1,4 +1,4 @@
-import { View, Text, Image } from "react-native-web"
+import { View, Text, Image } from "react-native"
 const Cartao = ({ tipo }) => {
     return (
         <View className="w-full justify-center items-center">

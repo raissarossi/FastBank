@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { CheckBox, Image, View, Text } from "react-native-web";
+import { CheckBox, Image, View, Text } from "react-native";
 
 const Step1 = ({ formCard, setFormCard }) => {
     const [isSelectedDebit, setSelectionDebit] = useState(false);

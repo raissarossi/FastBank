@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image } from "react-native-web";
+import { View, Text, Image } from "react-native";
 import VoltarBtn from '../General/VoltarBtn';
 
 

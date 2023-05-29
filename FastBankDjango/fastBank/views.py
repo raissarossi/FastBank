@@ -5,7 +5,9 @@ from rest_framework import viewsets
 from rest_framework_simplejwt.tokens import AccessToken
 from rest_framework.permissions import IsAuthenticated
 import decimal
-
+from rest_framework.response import Response
+from .sorteador import cartao
+from django.http import HttpResponseBadRequest
 # PROXIMOS PASSOS
 
 # CRIAR CARTAO -- MOSTRAR
@@ -14,7 +16,12 @@ import decimal
 
 
 
-
+def get_id(request):
+    token = request.META.get('HTTP_AUTHORIZATION', '').split(' ')[1]
+    print(token)
+    remetente = AccessToken(token)
+    contaRemetenteId = remetente['user_id']
+    return contaRemetenteId
 
 
 
@@ -22,52 +29,6 @@ class ClienteListarDetalhar(viewsets.ModelViewSet):
     # permission_classes = (IsAuthenticated,)
     queryset = Cliente.objects.all()
     serializer_class = ClienteSerializer
-
-    def list(self, request, *args, **kwargs):
-        #LISTAR TODOS OS CLIENTES
-
-
-        # QUEM FOI O AUTOR DO REQUEST???
-        
-
-        # token = request.META.get('HTTP_AUTHORIZATION', '').split(' ')[1]
-        # print(token)
-        # dados = AccessToken(token)
-        # contaId = dados['user_id']
-        # print(contaId)
-        # conta = Conta.objects.get(cliente=int(contaId))
-        # print(conta.cliente.nome)
-        # print(conta.saldo)
-        #QUEM FEZ A REQUISIÇÃO FOI O ID 1
-
-
-        return super().list(request, *args, **kwargs)
-    # def get_queryset(self):
-    #     queryset = Cliente.objects.all()
-    #     resultado = queryset.filter(user=1)
-
-    #     return super().get_queryset()
-
-    # def create(self, request, *args, **kwargs):
-        # conta = Conta.objects.filter(cliente=1)
-        # for i in conta:
-        #     if i.numero == request.data['numero']:
-        #         if i.saldo > request.data['valor_transferencia']:
-        #             mov = Movimentacao()
-        #             mov.conta = i.id
-        #             mov.valor = request.data['valor_transferencia']
-        #             mov.save()
-
-                    
-        #             gustavo = Conta.objects.get(numero=request.data['numero'])
-        #             gustavo.saldo += decimal(request.data['valor_transferencia'])
-        #             gustavo.save()
-
-        #             if gustavo is not None:
-        #                 mov2 = Movimentacao()
-        #                 mov2.conta = gustavo.id
-        #                 mov2.save()
-        # return super().create(request, *args, **kwargs)
 
 class ClientePFListarDetalhar(viewsets.ModelViewSet):
     # permission_classes = (IsAuthenticated,)
@@ -83,16 +44,32 @@ class ContaListarDetalhar(viewsets.ModelViewSet):
     # permission_classes = (IsAuthenticated,)
     queryset = Conta.objects.all()
     serializer_class = ContaSerializer
-    
-"""
-class ContaVerify(viewsets.ListaView):
+
+class CartoesListarDetalhar(viewsets.ModelViewSet):
     # permission_classes = (IsAuthenticated,)
-    queryset = Conta.objects.all()
-    serializer_class = ContaSerializer
-    def list(request, *args, **kwargs):
+    queryset = Cartoes.objects.all()
+    serializer_class = CartoesSerializer
+    
+    def create(self, request, *args, **kwargs):
+        id = get_id(request)
+        conta = Conta.objects.get(cliente=id)
+        print(conta)
+        tipo = request.data['tipo']        
+
+        if tipo == 'd' and Cartoes.objects.filter(conta=conta, tipo='d').exists():
+            return HttpResponseBadRequest("Já existe um cartão do tipo 'debito' associado a esta conta.")
         
-        return Conta.objects.filter(id=request.data['id'])
-"""
+        if tipo == 'c' and Cartoes.objects.filter(conta=conta, tipo='c').count() >= 5:
+            return HttpResponseBadRequest("Limite máximo de cartões do tipo 'credito' atingido para esta conta.")
+        
+        if tipo == 'b' and Cartoes.objects.filter(conta=conta, tipo='b').exists():
+            return HttpResponseBadRequest("Limite máximo de cartões do tipo 'crebito' atingido para esta conta.")
+        
+        numero = cartao()
+        resposta = Cartoes.objects.create(conta=conta, tipo=tipo, numero=numero)
+        
+        return Response(CartoesSerializer(resposta).data,200)
+
 
 class MovimentacaoListarDetalhar(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
@@ -100,21 +77,9 @@ class MovimentacaoListarDetalhar(viewsets.ModelViewSet):
     serializer_class = MovimentacaoSerializer
 
     def create(self, request, *args, **kwargs):
-
-        #=============================================NESSE ESPAÇO AKI=============================================#
-        #=============================================NESSE ESPAÇO AKI=============================================#
-        #=============================================NESSE ESPAÇO AKI=============================================#
-
-        token = request.META.get('HTTP_AUTHORIZATION', '').split(' ')[1]
-        print(token)
-        remetente = AccessToken(token)
-        contaRemetenteId = remetente['user_id']
-
+        contaRemetenteId = get_id(request)
         conta_remetente = Conta.objects.get(cliente=int(contaRemetenteId))
 
-        #=============================================NESSE ESPAÇO AKI=============================================#
-        #=============================================NESSE ESPAÇO AKI=============================================#
-        #=============================================NESSE ESPAÇO AKI=============================================#
         print(request.data)
         # #pegar o token e obter o user_id
         # print("dest :",destinatario)
@@ -147,6 +112,12 @@ class MovimentacaoListarDetalhar(viewsets.ModelViewSet):
             raise serializers.ValidationError('conta e destinatario sao os mesmos')
 
         return super().create(request, *args, **kwargs)
+    
+    def list(self, request, *args, **kwargs):
+        id_user = get_id(request)
+        movimentacoes = Movimentacao.objects.filter(conta=id_user)
+        return Response(MovimentacaoSerializer(movimentacoes, many=True).data)
+    
 
 class InvestimentoListarDetalhar(viewsets.ModelViewSet):
     # permission_classes = (IsAuthenticated,)

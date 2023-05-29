@@ -1,5 +1,5 @@
 import { Touchable } from "react-native";
-import { View } from "react-native-web";
+import { View } from "react-native";
 import { TouchableOpacity } from 'react-native';
 import Btns from "./Btns";
 import { Ionicons } from '@expo/vector-icons';

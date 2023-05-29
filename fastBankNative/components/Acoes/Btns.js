@@ -1,5 +1,5 @@
 import { TouchableOpacityBase, View } from "react-native";
-import { Pressable, TouchableOpacity } from "react-native-web";
+import { Pressable, TouchableOpacity } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 
 const Btns = ({ pagina, icon }) => {
