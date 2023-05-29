@@ -17,7 +17,7 @@ const SolicitarCartao = ({ navigation }) => {
 
     const PageDisplay = () => {
         if (page === 0) {
-            return <Step0 />
+            return <Step2 />
         }
         else if (page === 1) {
             return <Step1 formCard={formCard} setFormCard={setFormCard}/>
@@ -30,13 +30,13 @@ const SolicitarCartao = ({ navigation }) => {
         }
     }
 const CheckInput = () => {
-    if (page === 1){
-        if(formCard.cartaoD==true || formCard.cartaoC==true){
-            return formCard.cartaoD && formCard.cartaoC
-        }
-    }
     if (page === 0 ){
         return true
+    }
+    if (page === 1){
+        if(formCard.cartaoD==true || formCard.cartaoC==true){
+            return true
+        }
     }
         return false
     
@@ -53,7 +53,7 @@ const CheckInput = () => {
                 {PageDisplay()}
             </View>
             <View className="w-full h-2/6 bottom-0 flex items-end">
-                <Pressable className="w-2/6 h-12 m-5 rounded-2xl disabled:bg-slate-600 bg-black flex items-center justify-center" disabled={isNextDisabled} onPress={() => {
+                <Pressable disabled={isNextDisabled} className={`w-2/6 h-12 m-5 rounded-2xl flex items-center justify-center ${isNextDisabled ? "bg-dark-grey1" : "bg-black"}`} onPress={() => {
                     if (page == FormTitles.length - 1) {
                         navigation.navigate('Start')
                     }
