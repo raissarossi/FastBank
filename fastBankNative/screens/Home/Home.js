@@ -13,6 +13,7 @@ export default function Home({ navigation }) {
     const { user } = useSession(navigation)
     const MaterialIconss = styled(MaterialIcons)
     const [showSaldo, setShowSaldo] = useState(false)
+    
 
     return (
         <View>

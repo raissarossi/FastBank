@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Text, View, Pressable } from 'react-native';
 import Icons from '../../components/Icons/Icons';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons'; import { Feather } from '@expo/vector-icons'; import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 import Navbar from '../../components/Navbar/Navbar'
 import { useSession } from '../../components/services/ApiToken';
 
@@ -17,15 +17,15 @@ export default function Transferencias({ navigation }) {
             <View className="bg-black h-1/4 flex items-center justify-around pt-6">
                 <View className="flex flex-row w-full justify-evenly">
                     <Pressable onPress={() => {navigation.navigate('TelaTransf', { title: 'Phone', tipo: 'Pix' })}} className='flex items-center border border-white w-3/12 rounded-xl'>
-                        <Icons classN={"p-1"} iconName={"ios-barcode-outline"} collection={Ionicons} color={"white"} size={48} />
+                        <Icons classN={"p-1"} iconName={"phone"} collection={Feather} color={"white"} size={28} />
                         <Text className="text-white p-1">Phone</Text>
                     </Pressable>
                     <Pressable onPress={() => navigation.navigate('TelaTransf', { title: 'Email', tipo: 'Pix' })} className='flex items-center border border-white w-3/12 rounded-xl'>
-                        <Icons classN={"p-1"} iconName={"ios-barcode-outline"} collection={Ionicons} color={"white"} size={48} />
+                        <Icons classN={"p-1"} iconName={"email-multiple-outline"} collection={MaterialCommunityIcons} color={"white"} size={28} />
                         <Text className="text-white p-1">Email</Text>
                     </Pressable>
                     <Pressable onPress={() => navigation.navigate('TelaTransf', { title: 'cpf', tipo: 'Pix' })} className='flex items-center border border-white w-3/12 rounded-xl'>
-                        <Icons classN={"p-1"} iconName={"ios-barcode-outline"} collection={Ionicons} color={"white"} size={48} />
+                        <Icons classN={"p-1"} iconName={"document-text-outline"} collection={Ionicons} color={"white"} size={28} />
                         <Text className="text-white p-1">CPF</Text>
                     </Pressable>
                 </View>

@@ -11,39 +11,43 @@ class ClienteSerializer(serializers.ModelSerializer):
 class ContaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Conta
-        fields = ('id','cliente','agencia','numero','digito','saldo','limite')
+        fields = ('id','cliente','agencia', 'numero','digito','saldo','limite', 'chavePix',)
 
 class ClientePFSerializer(serializers.ModelSerializer):
     class Meta:
         model = ClientePF
-        fields = ('id','cliente','rg')
+        fields = ('id','cliente','rg',)
 
 class CartoesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cartoes
-        fields =('id', 'conta', 'tipo', 'numero', 'bandeira')
+        fields =('id', 'conta', 'tipo', 'numero', 'bandeira',)
 
 class ClientePJSerializer(serializers.ModelSerializer):
     class Meta:
         model = ClientePJ
-        fields = ('id','cliente', 'inscricaoEstadual','inscricaoMunicipal')
+        fields = ('id','cliente', 'inscricaoEstadual','inscricaoMunicipal',)
 
 class MovimentacaoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movimentacao
-        fields = ('id','conta','chavePix','tipo','valor','destinatario','data')
+        fields = ('id','conta','chavePix','tipo','valor','destinatario','data', 'descricao',)
+# class MovimentacaoSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Movimentacao
+#         fields = ('id','conta','chavePix','tipo','valor','destinatario','data', 'descricao',)
 
 class InvestimentoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Investimento
-        fields = ('id','conta', 'valor', 'prazo', 'saldoInvestido', 'local', 'finalizado')
+        fields = ('id','conta', 'valor', 'prazo', 'saldoInvestido', 'local', 'finalizado',)
 
 class EmprestimoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Emprestimo
-        fields = ('id','conta','valor','juros','data','aprovado','observacao')
+        fields = ('id','conta','valor','juros','data','aprovado','observacao',)
 
 class ParcelasSerializer(serializers.ModelSerializer):
     class Meta:
         model = Parcelas
-        fields = ('id','emprestimo','vezes','valorParcela','dataPagamento','valorPago')
+        fields = ('id','emprestimo','vezes','valorParcela','dataPagamento','valorPago',)

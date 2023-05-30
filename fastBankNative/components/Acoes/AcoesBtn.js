@@ -16,7 +16,7 @@ const AcoesBtn = () => {
             <Btns icon={
                 <Ionicons name="card-outline" size={24} color="black" />
             }
-                pagina={() => navigation.navigate('Transferencias', { title: 'PIX' })}>
+                pagina={() => navigation.navigate('MeusCartoes', { title: 'PIX' })}>
                 
             </Btns>
 

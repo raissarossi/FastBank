@@ -11,4 +11,6 @@ router.register('contaspj', views.ClientePJListarDetalhar)
 router.register('movimentacao', views.MovimentacaoListarDetalhar)
 router.register('cartoes', views.CartoesListarDetalhar)
 
-urlpatterns = [] + router.urls
+urlpatterns = [
+    path('contas/<str:chavePix>', view=views.ContaVerificarPix.as_view())
+] + router.urls

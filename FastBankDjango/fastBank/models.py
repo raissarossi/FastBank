@@ -76,7 +76,7 @@ class ClientePJ(models.Model):
     inscricaoMunicipal = models.CharField(max_length=30)
 
     def __str__(self) -> str:
-        return self.cliente
+        return self.cliente.nome
 
 class Conta(models.Model):
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
@@ -86,6 +86,9 @@ class Conta(models.Model):
     saldo = models.DecimalField(max_digits=20, decimal_places=2)
     limite = models.DecimalField(max_digits=20, decimal_places=2)
     chavePix = models.CharField(max_length=100, unique=True)
+
+    def __str__(self) -> str:
+        return self.cliente.nome
 
 class Cartoes(models.Model):
     DEBITO = 'd'
@@ -104,12 +107,21 @@ class Cartoes(models.Model):
 
 
 class Movimentacao(models.Model):
+    PIX = 'p'
+    TRANSFERENCIA = 't'
+    DEPOSITO = 'd'
+    TIPOS = (
+        (PIX, "PIX"),
+        (TRANSFERENCIA, "Transferência"),
+        (DEPOSITO, "Depósito")
+    )
     conta = models.ForeignKey(Conta, on_delete=models.CASCADE, related_name="conta")
     chavePix = models.CharField(max_length=100)
-    tipo = models.CharField(max_length=1) # PIX TRANFERENCIA PAGAMENTO
-    valor = models.DecimalField(max_digits=10, decimal_places=2)
+    tipo = models.CharField(max_length=1, choices=TIPOS) # PIX TRANFERENCIA PAGAMENTO
+    valor = models.DecimalField(max_digits=10, decimal_places=2, default="p")
     destinatario = models.CharField(max_length=100)
     data = models.DateTimeField(auto_now_add=True)
+    descricao = models.CharField(max_length=100)
 
 
 class Investimento(models.Model):

@@ -3,6 +3,7 @@ import { Text, View, Pressable } from 'react-native';
 import VoltarBtn from '../../components/General/VoltarBtn';
 import Inputt from '../../components/General/Input';
 import { useSession } from '../../components/services/ApiToken';
+import api from '../../components/services/api';
 
 
 export default function TelaTransf({ navigation, route }) {
@@ -52,11 +53,16 @@ export default function TelaTransf({ navigation, route }) {
 
     }, [key])
 
-    // const verificarKey = () =>{
-    //     api.get("auth/users/"){
-    //         if(key)
-    //     }.then((res)=>{})
-    // }
+    const verificarKey = () =>{
+        api.get(`bank/contas/${key}`).then((res)=>{
+            console.log(res.data);
+            if (res.data[0].agencia == undefined){
+                return
+            }
+            navigation.navigate('TelaValor', {tipo:{tipo}, key: {key}})
+        })
+        
+    }
 
     return (
         <View className='h-full'>
@@ -77,7 +83,7 @@ export default function TelaTransf({ navigation, route }) {
             {tipo == "Pix"
                 ? <>
                     <Text className="text-2xl font-semibold mt-14 mb-5 px-10">Insert the key of who will receive...</Text>
-                    <Inputt texto="Key..." onChangeText={text => setKey(text)} value={key} />
+                    <Inputt texto={title+"..."} onChangeText={text => setKey(text)} value={key} />
                 </>
                 :
                 <>
@@ -88,7 +94,9 @@ export default function TelaTransf({ navigation, route }) {
                 </>
             }
             <View className="w-full flex items-center absolute bottom-16">
-                <Pressable onPress={() => {(navigation.navigate('TelaValor', { title: {title}, tipo: {tipo} }),(verificarKey()))}} className="bg-black w-4/5 h-10 flex items-center justify-center rounded-full">
+                <Pressable onPress={() => {
+                    verificarKey()
+                    }} className="bg-black w-4/5 h-10 flex items-center justify-center rounded-full">
                     <Text className="text-white">Next</Text>
                 </Pressable>
             </View>

@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import *
 from .serializers import *
 from rest_framework import viewsets
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, ListAPIView
 from rest_framework_simplejwt.tokens import AccessToken
 from rest_framework.permissions import IsAuthenticated
 import decimal
@@ -45,6 +46,15 @@ class ContaListarDetalhar(viewsets.ModelViewSet):
     queryset = Conta.objects.all()
     serializer_class = ContaSerializer
 
+class ContaVerificarPix(ListAPIView):
+
+    serializer_class = ContaSerializer
+
+    def get_queryset(self):
+        parametro = self.kwargs['chavePix']
+        queryset = Conta.objects.filter(chavePix=parametro)
+        return queryset
+    
 class CartoesListarDetalhar(viewsets.ModelViewSet):
     # permission_classes = (IsAuthenticated,)
     queryset = Cartoes.objects.all()

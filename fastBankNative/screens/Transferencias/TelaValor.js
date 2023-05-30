@@ -6,14 +6,30 @@ import ValorBtn from '../../components/Acoes/ValorBtn';
 import { TextInput } from 'react-native-web';
 import Saldo from '../../components/Acoes/Saldo';
 import { useSession } from '../../components/services/ApiToken';
+import api from '../../components/services/api';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const TelaValor = ({navigation}) => {
-    const {user} = useSession(navigation)
+const TelaValor = ({ navigation, route }) => {
+    const { user } = useSession(navigation)
     const [valor, setValor] = useState('')
+    const [token, setToken] = useState('')
+    const { key, tipo } = route.params;
+    const [mov, setMov] = useState({
+        conta: user.id,
+        chavePix: key,
+        tipo: tipo,
+        valor: valor,
+        descricao: '',
+    })
+
+    useEffect(()=>{
+        AsyncStorage.getItem("dados").then((res)=>{setToken(JSON.parse(res).access)})
+    },[])
+
     useEffect(() => {
         console.log(valor);
         if (valor.length > 0) {
-            const formattedValor = valor.replace(/[^0-9]/g, "");
+            const formattedValor = valor.replace(/[^0-9.]/g, "");
             const formattedValor2 = parseFloat(formattedValor)
             setValor(formattedValor2);
         }
@@ -21,6 +37,20 @@ const TelaValor = ({navigation}) => {
             setValor('')
         }
     }, [valor])
+
+    const sendTransf = () => {
+        console.log(user);
+        
+        api.post("bank/movimentacao/", {
+            conta: mov.conta ,
+            chavePix: mov.chavePix ,
+            tipo: mov.tipo ,
+            valor: mov.valor ,
+            descricao: mov.descricao ,
+        },{headers:{
+            Authorization: 'JWT '+ token
+        }})
+    }
     return (
         <View className='h-full'>
             <View className="flex flex-row bg-black items-center justify-between pt-10 pb-6">
@@ -42,8 +72,8 @@ const TelaValor = ({navigation}) => {
             </View>
             <Text className="text-2xl font-semibold mt-8 px-10">Description</Text>
             <View className="w-full flex justify-center items-center">
-                <TextInput placeholder="Description" keyboardType="numeric"
-                className='w-4/5 h-12 border-b-2 pl-2 placeholder:text-dark-grey1 placeholder:font-semibold placeholder:italic placeholder:text-xl '></TextInput>
+                <TextInput placeholder="Description" onChangeText={(text) => setMov({ ...mov, descricao: text })} keyboardType="numeric"
+                    className='w-4/5 h-12 border-b-2 pl-2 placeholder:text-dark-grey1 placeholder:font-semibold placeholder:italic placeholder:text-xl '></TextInput>
             </View>
             <View className="w-full flex justify-center items-center pt-3">
                 <View className="w-4/5 flex items-end -mr-5">
@@ -51,7 +81,7 @@ const TelaValor = ({navigation}) => {
                 </View>
             </View>
             <View className="w-full flex items-center absolute bottom-16">
-                <Pressable onPress={() => navigation.navigate('Transferencias')} className="bg-black w-4/5 h-10 flex items-center justify-center rounded-full">
+                <Pressable onPress={()=>sendTransf()} className="bg-black w-4/5 h-10 flex items-center justify-center rounded-full">
                     <Text className="text-white">Next</Text>
                 </Pressable>
             </View>
