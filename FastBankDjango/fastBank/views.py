@@ -91,6 +91,7 @@ class MovimentacaoListarDetalhar(viewsets.ModelViewSet):
         conta_remetente = Conta.objects.get(cliente=int(contaRemetenteId))
 
         print(request.data)
+        
         # #pegar o token e obter o user_id
         # print("dest :",destinatario)
         conta_destinatario = Conta.objects.get(chavePix=request.data['chavePix'])
@@ -103,23 +104,26 @@ class MovimentacaoListarDetalhar(viewsets.ModelViewSet):
         if conta_remetente.saldo <= decimal.Decimal(request.data['valor']):
             raise serializers.ValidationError('Saldo is not suficiente')
         
+        if contaRemetenteId == conta_destinatario.id:
+            raise serializers.ValidationError('conta e destinatario sao os mesmos')
+        
         conta_remetente.saldo -= decimal.Decimal(request.data['valor'])
         conta_remetente.save()
         
         conta_destinatario.saldo += decimal.Decimal(request.data['valor'])
         conta_destinatario.save()
 
-        _mutable = request.data._mutable
+        # _mutable = request.data._mutable
 
         # set to mutable
-        request.data._mutable = True
+        # request.data._mutable = True
         request.data['conta'] = contaRemetenteId
         request.data['destinatario'] = destinatario.nome
-        request.data._mutable = _mutable
+        # request.data._mutable = False
+        # request.data._mutable = _mutable
         # print("EESSEE :"+request.data['contaDestinatario']+" : "+contaRemetenteId)
 
-        if contaRemetenteId == conta_destinatario.id:
-            raise serializers.ValidationError('conta e destinatario sao os mesmos')
+        
 
         return super().create(request, *args, **kwargs)
     
@@ -138,6 +142,41 @@ class EmprestimoListarDetalhar(viewsets.ModelViewSet):
     # permission_classes = (IsAuthenticated,)
     queryset = Emprestimo.objects.all()
     serializer_class = EmprestimoSerializer
+
+    def create(self, request, *args, **kwargs):
+        contaRemetenteId = get_id(request)
+        conta_remetente = Conta.objects.get(cliente=int(contaRemetenteId))
+        valorEmprestimo = float(request.data['valor'])
+        juros = 0.05
+        if (valorEmprestimo > 1500):
+            juros = 0.1
+        if (valorEmprestimo > 10000):
+            juros = 0.3
+        if (valorEmprestimo > 50000):
+            juros = 0.5
+        saldo = float(conta_remetente.saldo)
+
+        if (saldo*3.00 >= valorEmprestimo):
+            conta_remetente.saldo += decimal.Decimal(valorEmprestimo)
+            valorPagar = (valorEmprestimo)+(valorEmprestimo*juros)
+            aprovado = True
+            conta_remetente.save()
+        else:
+            raise serializers.ValidationError('Este valor não é válido para emprestimo')
+
+
+        _mutable = request.data._mutable
+
+        request.data._mutable = True
+        request.data['valor'] = valorEmprestimo
+        request.data['juros'] = juros
+        request.data['valorPagar'] = valorPagar
+        request.data['aprovado'] = aprovado
+        request.data._mutable = _mutable
+
+        return super().create(request, *args, **kwargs)
+    
+
 
 class ParcelasListarDetalhar(viewsets.ModelViewSet):
     # permission_classes = (IsAuthenticated,)

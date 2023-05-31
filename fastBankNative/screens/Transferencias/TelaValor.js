@@ -15,16 +15,23 @@ const TelaValor = ({ navigation, route }) => {
     const [token, setToken] = useState('')
     const { key, tipo } = route.params;
     const [mov, setMov] = useState({
-        conta: user.id,
-        chavePix: key,
-        tipo: tipo,
-        valor: valor,
+        conta: user,
+        chavePix: key.key,
+        tipo: tipo.choice,
+        valor: '',
         descricao: '',
     })
 
     useEffect(()=>{
         AsyncStorage.getItem("dados").then((res)=>{setToken(JSON.parse(res).access)})
+        
+        
     },[])
+    useEffect(()=>{
+        setMov({ ...mov, conta: user.id })
+        console.log("usermudou");
+        console.log(mov)
+    },[user])
 
     useEffect(() => {
         console.log(valor);
@@ -34,22 +41,31 @@ const TelaValor = ({ navigation, route }) => {
             setValor(formattedValor2);
         }
         else if (valor.length == 0) {
-            setValor('')
+            setValor(0)
         }
+        setMov({ ...mov, valor: valor })
     }, [valor])
 
     const sendTransf = () => {
+        console.log("user:");
         console.log(user);
+        console.log(mov);
+        if (mov.valor <= 0){
+            alert("O valor transferido deve ser maior do que 0")
+            return
+        }
+        if (mov.descricao.length <= 0){
+            alert("É Necessario ter uma descrição para realizar a transferencia")
+            return
+        }
         
-        api.post("bank/movimentacao/", {
-            conta: mov.conta ,
-            chavePix: mov.chavePix ,
-            tipo: mov.tipo ,
-            valor: mov.valor ,
-            descricao: mov.descricao ,
-        },{headers:{
+        api.post("bank/movimentacao/", mov
+        ,{headers:{
             Authorization: 'JWT '+ token
-        }})
+        }}
+        ).then(()=>{
+            alert("transferencia feita com sucesso!")
+        })
     }
     return (
         <View className='h-full'>
@@ -61,7 +77,7 @@ const TelaValor = ({ navigation, route }) => {
                 <View className='w-8 px-5 py-2 '></View>
             </View>
             <Text className="text-2xl font-semibold mt-14 mb-5 px-10">How Much?</Text>
-            <Inputt texto="$0,00" onChangeText={text => setValor(text)} value={valor} keyboardType="numeric" />
+            <Inputt texto="$0,00" onChangeText={text => setValor(text)} value={valor} />
             <View className="flex justify-center items-center w-full py-5">
                 <View className="flex flex-row w-4/5 justify-between">
                     <ValorBtn valor={1} onPress={() => setValor(valor + 1.00)} />

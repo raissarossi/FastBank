@@ -29,7 +29,9 @@ class CustomUserManager(BaseUserManager):
         extra_fields.setdefault('is_superuser', True)
         return self.create_user(CPF_CNPJ, password, **extra_fields)
 
-class Cliente(AbstractUser):   
+class Cliente(AbstractUser):  
+    failed_login_attempts_count = models.IntegerField(default=0)
+
     FISICO = 'F'
     JURIDICO='J'
     TYPES=[
@@ -59,6 +61,7 @@ class Cliente(AbstractUser):
     cep = models.CharField(max_length=10)
     complemento = models.CharField(max_length=100)
     type_person = models.CharField(max_length=1, choices=TYPES)
+    tentativas = models.IntegerField()
    
     def __str__(self) -> str:
         return self.nome
@@ -124,6 +127,15 @@ class Movimentacao(models.Model):
     descricao = models.CharField(max_length=100)
 
 
+class Emprestimo(models.Model):
+    conta = models.ForeignKey(Conta, on_delete=models.CASCADE)
+    valor =  models.DecimalField(max_digits=10, decimal_places=2)
+    juros = models.DecimalField(max_digits=10, decimal_places=2, default=0.05)
+    data = models.DateTimeField(auto_now_add=True)
+    valorPagar = models.DecimalField(max_digits=10, decimal_places=2)
+    aprovado = models.BooleanField(default=False)
+
+
 class Investimento(models.Model):
     conta = models.ForeignKey(Conta, on_delete=models.CASCADE)
     valor = models.DecimalField(max_digits=10, decimal_places=2)
@@ -131,14 +143,6 @@ class Investimento(models.Model):
     saldoInvestido = models.DecimalField(max_digits=10, decimal_places=2)
     local = models.CharField(max_length=50)
     finalizado = models.BooleanField(default=False)
-
-class Emprestimo(models.Model):
-    conta = models.ForeignKey(Conta, on_delete=models.PROTECT)
-    valor =  models.DecimalField(max_digits=10, decimal_places=2)
-    juros = models.DecimalField(max_digits=10, decimal_places=2)
-    data = models.DateTimeField(auto_now_add=True)
-    aprovado = models.BooleanField(default=False)
-    observacao = models.CharField(max_length=100, blank=True)
 
 
 class Parcelas(models.Model):

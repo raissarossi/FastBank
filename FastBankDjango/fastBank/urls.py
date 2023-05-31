@@ -10,6 +10,7 @@ router.register('contaspf', views.ClientePFListarDetalhar)
 router.register('contaspj', views.ClientePJListarDetalhar)
 router.register('movimentacao', views.MovimentacaoListarDetalhar)
 router.register('cartoes', views.CartoesListarDetalhar)
+router.register('emprestimo', views.EmprestimoListarDetalhar)
 
 urlpatterns = [
     path('contas/<str:chavePix>', view=views.ContaVerificarPix.as_view())

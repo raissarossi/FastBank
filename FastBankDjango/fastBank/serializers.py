@@ -45,7 +45,7 @@ class InvestimentoSerializer(serializers.ModelSerializer):
 class EmprestimoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Emprestimo
-        fields = ('id','conta','valor','juros','data','aprovado','observacao',)
+        fields = ('id', 'conta', 'valor', 'juros', 'data', 'valorPagar', 'aprovado',)
 
 class ParcelasSerializer(serializers.ModelSerializer):
     class Meta:

@@ -9,7 +9,7 @@ import api from '../../components/services/api';
 export default function TelaTransf({ navigation, route }) {
     const {user} = useSession(navigation)
     const [key, setKey] = useState('')
-    const { title, tipo } = route.params;
+    const { title, tipo, choice } = route.params;
 
     useEffect(() => {
         console.log(key.length);
@@ -59,7 +59,7 @@ export default function TelaTransf({ navigation, route }) {
             if (res.data[0].agencia == undefined){
                 return
             }
-            navigation.navigate('TelaValor', {tipo:{tipo}, key: {key}})
+            navigation.navigate('TelaValor', {tipo:{tipo, choice}, key: {key}})
         })
         
     }

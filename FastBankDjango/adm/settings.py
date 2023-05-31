@@ -29,6 +29,10 @@ DEBUG = True
 ALLOWED_HOSTS = ["*"]
 
 AUTH_USER_MODEL = 'fastBank.Cliente'
+AUTHENTICATION_BACKENDS = [
+    'fastBank.backends.CustomAuthenticationBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
 
 # Application definition
 

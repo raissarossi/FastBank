@@ -28,8 +28,8 @@ export function useSession(navigation) {
                     }
                 })
                 .then(res => {
-                    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-                    console.log(res);
+                    // console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+                    // console.log(res);
                     api.get(`bank/contas/${res.data.id}/`)
                     .then(resConta => {
                         setUser({...res.data, conta: {...resConta.data}});
