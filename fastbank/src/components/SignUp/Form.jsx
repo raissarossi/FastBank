@@ -60,7 +60,8 @@ function Form() {
         complemento: formData.complemento,
         type_person: formData.kindOfPerson,
         password: formData.senha,
-        CPF_CNPJ: formData.cpf_cnpj
+        CPF_CNPJ: formData.cpf_cnpj,
+        tentativas: 3
       }).then(res => {
         console.log(res);
         if (res.status == 201) {
@@ -69,6 +70,8 @@ function Form() {
         } else {
           alert(res.response.data)
         }
+      }).catch((err)=>{
+        console.log(err);
       })
   }
 

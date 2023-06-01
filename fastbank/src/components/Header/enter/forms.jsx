@@ -16,7 +16,7 @@ const Forms = () => {
     }).then((response) => {
       console.log(response)
       localStorage.setItem('dados', JSON.stringify(response.data));
-      rota('/infossignin')
+      rota('/Extrato')
     })
       .catch((error) => console.log(error))
   }

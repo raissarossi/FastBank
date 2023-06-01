@@ -12,10 +12,28 @@ class CustomUserManager(BaseUserManager):
         """
         if not CPF_CNPJ:
             raise ValueError('O CPF é obrigatório')
+        
+
+        # CPF_CNPJ = extra_fields.get('CPF_CNPJ')  
+        type_person = extra_fields.get('type_person')
+        print(type(CPF_CNPJ))
+        # print("tamanho: "+len(CPF_CNPJ))
+        if (type_person=="F"):
+            if len(CPF_CNPJ) == 11:
+                CPF_CNPJ = CPF_CNPJ[:3] + '.' + CPF_CNPJ[3:6] + '.' + CPF_CNPJ[6:9] + '-' + CPF_CNPJ[9:11]
+                
+
+
+        if (type_person=="J"):
+            if len(CPF_CNPJ) == 14:
+                CPF_CNPJ = CPF_CNPJ[:2] + '.' + CPF_CNPJ[2:5] + '.' + CPF_CNPJ[5:8] + '/' + CPF_CNPJ[8:12] + '-' + CPF_CNPJ[12:14]
+        # CPF_CNPJ.save()
+        print(CPF_CNPJ)
+
+
         user = self.model(CPF_CNPJ=CPF_CNPJ, **extra_fields)
         user.set_password(password)
         user.save()
-        tipoPessoa = extra_fields.get('type_person')
         # if tipoPessoa == 'F':
         #     ClientePF.objects.create(cliente=)
         Conta.objects.create(cliente=user, agencia=numeros(3), numero=numeros(7), digito=numeros(1), saldo=saldo(), limite=1000, chavePix=extra_fields.get('email'))
@@ -39,7 +57,7 @@ class Cliente(AbstractUser):
         (JURIDICO,'Pessoa Jurídica'),
     ]
     USERNAME_FIELD = 'CPF_CNPJ'
-    REQUIRED_FIELDS = ['nome', 'data_nascimento', 'telefone', 'email', 'observacao', 'logradouro', 'bairro', 'cidade', 'uf', 'cep', 'complemento', 'type_person', 'password']
+    REQUIRED_FIELDS = ['nome', 'data_nascimento', 'telefone', 'email', 'observacao', 'logradouro', 'bairro', 'cidade', 'uf', 'cep', 'complemento', 'type_person', 'password',]
 
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
@@ -61,7 +79,7 @@ class Cliente(AbstractUser):
     cep = models.CharField(max_length=10)
     complemento = models.CharField(max_length=100)
     type_person = models.CharField(max_length=1, choices=TYPES)
-    tentativas = models.IntegerField()
+    blocked_at = models.DateTimeField(null=True)
    
     def __str__(self) -> str:
         return self.nome

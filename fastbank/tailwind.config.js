@@ -44,6 +44,10 @@ export default {
         'lg1': '1100px',
         'xl': '1280px',
         '2xl': '1536px',
+      },
+      boxShadow: {
+        'light': '0 0px 50px 10px rgba(0, 0, 0, 0.1)',
+        'dark': '0 0px 35px 0px rgba(255, 255, 255, 0.2)',
       }
     },
   },

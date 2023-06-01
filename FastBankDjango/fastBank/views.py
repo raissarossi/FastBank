@@ -30,6 +30,32 @@ class ClienteListarDetalhar(viewsets.ModelViewSet):
     # permission_classes = (IsAuthenticated,)
     queryset = Cliente.objects.all()
     serializer_class = ClienteSerializer
+    
+    def create(self, request, *args, **kwargs):
+        CPF_CNPJ = request.data['CPF_CNPJ']  
+        type_person = request.data['type_person']
+
+        print("tamanho: "+len(CPF_CNPJ))
+        if (type_person=="F"):
+            if len(CPF_CNPJ) == 11:
+                CPF_CNPJ = CPF_CNPJ[:3] + '.' + CPF_CNPJ[3:6] + '.' + CPF_CNPJ[6:9] + '-' + CPF_CNPJ[9:11]
+                
+
+
+        if (type_person=="J"):
+            if len(CPF_CNPJ) == 14:
+                CPF_CNPJ = CPF_CNPJ[:2] + '.' + CPF_CNPJ[2:5] + '.' + CPF_CNPJ[5:8] + '/' + CPF_CNPJ[8:12] + '-' + CPF_CNPJ[12:14]
+        # CPF_CNPJ.save()
+        print(CPF_CNPJ)
+
+
+        _mutable = request.data._mutable
+        # set to mutable
+        request.data._mutable = True
+        request.data['CPF_CNPJ'] = CPF_CNPJ
+        request.data._mutable = False
+        request.data._mutable = _mutable
+        return super().create(request, *args, **kwargs)
 
 class ClientePFListarDetalhar(viewsets.ModelViewSet):
     # permission_classes = (IsAuthenticated,)
@@ -113,14 +139,14 @@ class MovimentacaoListarDetalhar(viewsets.ModelViewSet):
         conta_destinatario.saldo += decimal.Decimal(request.data['valor'])
         conta_destinatario.save()
 
-        # _mutable = request.data._mutable
+        _mutable = request.data._mutable
 
         # set to mutable
-        # request.data._mutable = True
+        request.data._mutable = True
         request.data['conta'] = contaRemetenteId
         request.data['destinatario'] = destinatario.nome
-        # request.data._mutable = False
-        # request.data._mutable = _mutable
+        request.data._mutable = False
+        request.data._mutable = _mutable
         # print("EESSEE :"+request.data['contaDestinatario']+" : "+contaRemetenteId)
 
         

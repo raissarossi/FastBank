@@ -63,4 +63,12 @@ input[type=number] {
   .table-head{
     @apply w-1/3 px-6 py-3 text-xs font-bold text-left dark:text-light-blue4 text-white uppercase mr-1 bg-light-blue3 
   }
+
+  /* EXTRATO */
+  .table-head-extrato{
+    @apply px-6 py-4 text-xs font-bold text-left text-white uppercase
+  }
+  .table-item-extrato{
+    @apply px-6 py-3 text-sm text-black whitespace-nowrap dark:bg-black dark:text-white
+  }
 }
