@@ -8,26 +8,31 @@ function AddressInfo({ formData, setFormData }) {
     useEffect(() => {
         // xxxxx-xxx
         console.log(cep)
-
-        if (cep.length == 8) {
-            setCep(cep.substring(0, 5) + '-' + cep.substring(5, 8))
-            consumirAPI()
-        }
-        if (cep.length < 9) {
-            if (cep.includes("-")) {
-                setCep(cep.replace("-", ""))
+        const formatoValido = /^\d{5}-\d{3}$/.test(cep);
+        if (cep.length == 8 || cep.length == 9) {
+            if (!cep.includes('-')) {
+                setCep(cep.substring(0, 5) + '-' + cep.substring(5, 8))
+            }
+            if (formatoValido) {
+                consumirAPI()
             }
         }
+        // if (cep.length < 9) {
+        //     setCep(cep.replace("-", ""))
+        // }
         if (cep.length <= 0) {
             setFormData({ ...formData, logradouro: '', uf: '', bairro: '', cidade: '', numero: '', complemento: '' })
         }
-        
+
     }, [cep])
-    
-    
+
+
     const consumirAPI = () => {
         axios.get(`https://viacep.com.br/ws/${cep}/json/`)
             .then(({ data }) => {
+                if (data.erro != undefined) {
+                    return
+                }
                 setFormData({ ...formData, cep: data.cep, logradouro: data.logradouro, uf: data.uf, bairro: data.bairro, cidade: data.localidade })
                 console.log(data);
                 console.log(formData);
@@ -87,7 +92,7 @@ function AddressInfo({ formData, setFormData }) {
                 required
                 valuei={formData.uf}
                 act={(event) => setFormData({ ...formData, uf: event.target.value })} />
-            
+
             <div className='flex justify-between w-11/12'>
                 <Input
                     sign="up"

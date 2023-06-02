@@ -9,6 +9,7 @@ import decimal
 from rest_framework.response import Response
 from .sorteador import cartao
 from django.http import HttpResponseBadRequest
+from django.db.models import Q
 # PROXIMOS PASSOS
 
 # CRIAR CARTAO -- MOSTRAR
@@ -35,7 +36,7 @@ class ClienteListarDetalhar(viewsets.ModelViewSet):
         CPF_CNPJ = request.data['CPF_CNPJ']  
         type_person = request.data['type_person']
 
-        print("tamanho: "+len(CPF_CNPJ))
+        # print("tamanho: "+len(CPF_CNPJ))
         if (type_person=="F"):
             if len(CPF_CNPJ) == 11:
                 CPF_CNPJ = CPF_CNPJ[:3] + '.' + CPF_CNPJ[3:6] + '.' + CPF_CNPJ[6:9] + '-' + CPF_CNPJ[9:11]
@@ -143,8 +144,10 @@ class MovimentacaoListarDetalhar(viewsets.ModelViewSet):
 
         # set to mutable
         request.data._mutable = True
-        request.data['conta'] = contaRemetenteId
-        request.data['destinatario'] = destinatario.nome
+        request.data['remetente'] = contaRemetenteId
+        request.data['remetenteNome'] = conta_remetente.cliente.nome
+        request.data['destinatario'] = conta_destinatario.id
+        request.data['destinatarioNome'] = destinatario.nome
         request.data._mutable = False
         request.data._mutable = _mutable
         # print("EESSEE :"+request.data['contaDestinatario']+" : "+contaRemetenteId)
@@ -155,7 +158,9 @@ class MovimentacaoListarDetalhar(viewsets.ModelViewSet):
     
     def list(self, request, *args, **kwargs):
         id_user = get_id(request)
-        movimentacoes = Movimentacao.objects.filter(conta=id_user)
+        Conta.objects.get(id=id_user)
+        movimentacoes = Movimentacao.objects.filter(Q(remetente=id_user) | Q(destinatario=id_user)).order_by("-data")
+        
         return Response(MovimentacaoSerializer(movimentacoes, many=True).data)
     
 

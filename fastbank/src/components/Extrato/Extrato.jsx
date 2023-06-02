@@ -6,19 +6,27 @@ import axios from 'axios';
 
 const Extrato = () => {
     const [extrato, setExtrato] = useState([])
+    const [user, setUser] = useState();
 
     useEffect(() => {
         let tokenAccess = JSON.parse(localStorage.getItem('dados'))
         console.log(tokenAccess)
-        api.get("bank/movimentacao/", {
-            headers: { Authorization: "JWT " + tokenAccess.access }
-        }).then(function (response) {
-            console.log(response)
-            setExtrato(response.data)
-        }).catch(function (err) {
-            console.log(err)
+        api.get('auth/users/me/', {
+            headers: { Authorization: "JWT " + tokenAccess.access}
+        }).then((response) => {
+            setUser(response.data.id)
+            api.get("bank/movimentacao/", {
+                headers: { Authorization: "JWT " + tokenAccess.access }
+            }).then(function (response) {
+                console.log(response)
+                setExtrato(response.data)
+            }).catch(function (err) {
+                console.log(err)
+            })
         })
+        
     }, [])
+
 
     return (
         <div className="dark:bg-black h-screen">
@@ -49,7 +57,10 @@ const Extrato = () => {
                             <tbody className="">
                                 <tr>
                                     <td className="table-item-extrato">{item.data}</td>
-                                    <td className="table-item-extrato">{item.destinatario}</td>
+                                    <td className="table-item-extrato">{
+                                        if(item.remetente == )
+                                    // item.destinatario
+                                    }</td>
                                     <td className="table-item-extrato">{item.chavePix}</td>
                                     <td className="table-item-extrato">$ {item.valor}</td>
                                 </tr>

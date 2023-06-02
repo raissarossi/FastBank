@@ -1,5 +1,6 @@
 import homeLight from '../../Images/Light/homeLight.png'
 import homeDark from '../../Images/Dark/homeDark.png'
+import LightHome from '../../Images/Home/LightHome.png'
 import rectangle3Dark from '../../Images/Dark/rectangle3Dark.png'
 import rectangle3Light from '../../Images/Light/rectangle3Light.png'
 import ContainerImg from './components/containerImg';
@@ -15,7 +16,7 @@ const Home = () => {
             <Forms />
             <Navbar />
             <div className='flex flex-col items-center overflow-hidden dark:bg-black'>
-                <img src={homeLight} className='flex dark:hidden w-full mb-5 sm:mb-8' />
+                <img src={LightHome} className='flex dark:hidden w-full mb-5 sm:mb-8' />
                 <img src={homeDark} className='hidden dark:flex w-full mb-5 sm:mb-8' />
                 <ContainerImg />
                 <div className='pt-10 w-full'

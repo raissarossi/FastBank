@@ -57,11 +57,11 @@ class Cliente(AbstractUser):
         (JURIDICO,'Pessoa Jurídica'),
     ]
     USERNAME_FIELD = 'CPF_CNPJ'
-    REQUIRED_FIELDS = ['nome', 'data_nascimento', 'telefone', 'email', 'observacao', 'logradouro', 'bairro', 'cidade', 'uf', 'cep', 'complemento', 'type_person', 'password',]
+    REQUIRED_FIELDS = ['nome', 'data_nascimento', 'telefone', 'email', 'observacao', 'logradouro', 'bairro', 'cidade', 'uf', 'cep', 'complemento', 'type_person', 'password']
 
     is_active = models.BooleanField(default=True)
-    # blocked_at = models.DateTimeField(default=False)
     is_staff = models.BooleanField(default=False)
+    blocked_at = models.DateTimeField(null=True)
     objects = CustomUserManager()
     username = None
 
@@ -136,11 +136,13 @@ class Movimentacao(models.Model):
         (TRANSFERENCIA, "Transferência"),
         (DEPOSITO, "Depósito")
     )
-    conta = models.ForeignKey(Conta, on_delete=models.CASCADE, related_name="conta")
+    remetente = models.ForeignKey(Conta, on_delete=models.CASCADE, related_name="remetente")
+    remetenteNome = models.CharField(max_length=100)
+    destinatario = models.ForeignKey(Conta, on_delete=models.CASCADE, related_name="destinatario")
+    destinatarioNome = models.CharField(max_length=100)
     chavePix = models.CharField(max_length=100)
     tipo = models.CharField(max_length=1, choices=TIPOS) # PIX TRANFERENCIA PAGAMENTO
     valor = models.DecimalField(max_digits=10, decimal_places=2, default="p")
-    destinatario = models.CharField(max_length=100)
     data = models.DateTimeField(auto_now_add=True)
     descricao = models.CharField(max_length=100)
 

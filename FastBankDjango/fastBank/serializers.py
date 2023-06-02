@@ -5,7 +5,7 @@ from .models import *
 class ClienteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cliente
-        fields = ('id', 'nome', 'CPF_CNPJ', 'data_nascimento', 'telefone', 'email', 'observacao', 'logradouro', 'bairro', 'cidade', 'uf', 'cep', 'complemento', 'type_person', 'is_staff', 'is_active',
+        fields = ('id', 'nome', 'CPF_CNPJ', 'data_nascimento', 'telefone', 'email', 'observacao', 'logradouro', 'bairro', 'cidade', 'uf', 'cep', 'complemento', 'type_person', 'blocked_at', 'is_active',
         )
 
 class ContaSerializer(serializers.ModelSerializer):
@@ -31,7 +31,7 @@ class ClientePJSerializer(serializers.ModelSerializer):
 class MovimentacaoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movimentacao
-        fields = ('id','conta','chavePix','tipo','valor','destinatario','data', 'descricao',)
+        fields = ('id','remetente','remetenteNome','destinatario','destinatarioNome','chavePix','tipo','valor','data','descricao',)
 # class MovimentacaoSerializer(serializers.ModelSerializer):
 #     class Meta:
 #         model = Movimentacao
