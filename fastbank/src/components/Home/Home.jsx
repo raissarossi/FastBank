@@ -1,12 +1,12 @@
 import homeLight from '../../Images/Light/homeLight.png'
 import homeDark from '../../Images/Dark/homeDark.png'
-import LightHome from '../../Images/Home/LightHome.png'
 import rectangle3Dark from '../../Images/Dark/rectangle3Dark.png'
 import rectangle3Light from '../../Images/Light/rectangle3Light.png'
 import ContainerImg from './components/containerImg';
 import Navbar from '../Header/Navbar'
 import Forms from '../Header/enter/forms'
 import Texts from './components/Texts';
+import Footer from '../Footer/Footer';
 
 
 
@@ -16,12 +16,12 @@ const Home = () => {
             <Forms />
             <Navbar />
             <div className='flex flex-col items-center overflow-hidden dark:bg-black'>
-                <img src={LightHome} className='flex dark:hidden w-full mb-5 sm:mb-8' />
+                <img src={homeLight} className='flex dark:hidden w-full mb-5 sm:mb-8' />
                 <img src={homeDark} className='hidden dark:flex w-full mb-5 sm:mb-8' />
                 <ContainerImg />
                 <div className='pt-10 w-full'
                     data-aos="fade-up"
-                    data-aos-delay="400"
+                    data-aos-delay="400"API DeploymentFeather
                     data-aos-duration="900"
                     data-aos-easing="ease-in-out"
                     data-aos-mirror="true"
@@ -40,6 +40,7 @@ const Home = () => {
 
                 </div>
             </div>
+            <Footer />
         </>
     );
 }

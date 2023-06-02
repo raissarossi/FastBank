@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "undefined/subscriptions/2614698b-17ec-4968-8764-7bd2195c4dd4/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/fastbank-rai",
+    "appService.deploySubpath": "."
+}

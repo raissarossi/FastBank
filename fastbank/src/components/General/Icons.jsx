@@ -1,5 +1,15 @@
+import gitIconLight from '../../Images/Light/gitIconLight.png'
+import figmaIconLight from '../../Images/Light/figmaIconLight.png'
+import azureIconLight from '../../Images/Light/azureIconLight.png'
+import vercelIconLight from '../../Images/Light/vercelLight.png'
+import gitIconDark from '../../Images/Dark/gitIconDark.png'
+import figmaIconDark from '../../Images/Dark/figmaIconDark.png'
+import azureIconDark from '../../Images/Dark/azureIconDark.png'
+import vercelIconDark from '../../Images/Dark/vercelIconDark.png'
+
+
 const Icons = ({ icon }) => {
-  
+
   if (icon == "card") {
     return (
       <div>
@@ -38,6 +48,69 @@ const Icons = ({ icon }) => {
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-10 h-10 sm:w-16 sm:h-16 text-light-blue4 dark:text-white">
           <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
+      </div>
+    );
+  }
+
+
+
+  // ICONS FOOTER ---light
+  if (icon == "gitLight") {
+    return (
+      <div>
+        <img src={gitIconLight} className='flex dark:hidden w-full mb-5 sm:mb-8' />
+      </div>
+    );
+  }
+  if (icon == "figmaLight") {
+    return (
+      <div>
+        <img src={figmaIconLight} className='flex dark:hidden w-full mb-5 sm:mb-8' />
+      </div>
+    );
+  }
+  if (icon == "azureLight") {
+    return (
+      <div>
+        <img src={azureIconLight} className='flex dark:hidden w-full mb-5 sm:mb-8' />
+      </div>
+    );
+  }
+  if (icon == "vercelLight") {
+    return (
+      <div>
+        <img src={vercelIconLight} className='flex dark:hidden w-full mb-5 sm:mb-8' />
+      </div>
+    );
+  }
+
+
+  // ICONS FOOTER ---dark
+  if (icon == "gitDark") {
+    return (
+      <div>
+        <img src={gitIconDark} className='flex dark:hidden w-full mb-5 sm:mb-8' />
+      </div>
+    );
+  }
+  if (icon == "figmaDark") {
+    return (
+      <div>
+        <img src={figmaIconDark} className='flex dark:hidden w-full mb-5 sm:mb-8' />
+      </div>
+    );
+  }
+  if (icon == "azureDark") {
+    return (
+      <div>
+        <img src={azureIconDark} className='flex dark:hidden w-full mb-5 sm:mb-8' />
+      </div>
+    );
+  }
+  if (icon == "vercelDark") {
+    return (
+      <div>
+        <img src={vercelIconDark} className='flex dark:hidden w-full mb-5 sm:mb-8' />
       </div>
     );
   }

@@ -1,4 +1,4 @@
-import Icons from './Icons';
+import Icons from '../../General/Icons';
 import data from './Texts.json'
 
 const Texts = () => {
