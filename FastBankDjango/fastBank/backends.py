@@ -21,6 +21,7 @@ class CustomAuthenticationBackend(ModelBackend):
                     user.is_active = True
                     user.blocked_at = None
 
+
             user.save()
             return user
         else:
@@ -31,7 +32,9 @@ class CustomAuthenticationBackend(ModelBackend):
             # Verifique se a conta deve ser bloqueada.
             if user.failed_login_attempts_count >= 3:
                 user.is_active = False
-                user.blocked_at
+                user.blocked_at = timezone.now()
                 user.save()
             
             return None
+
+

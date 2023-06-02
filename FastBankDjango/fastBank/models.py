@@ -71,7 +71,7 @@ class Cliente(AbstractUser):
     updated_at =  models.DateTimeField(auto_now=True)
     telefone = models.CharField(max_length=15)#, unique=True)
     email = models.CharField(max_length=100, unique=True)#, unique=True)
-    observacao = models.CharField(max_length=100)
+    observacao = models.CharField(max_length=100, blank=True, null=True)
     logradouro = models.CharField(max_length=100)
     bairro = models.CharField(max_length=50)
     cidade = models.CharField(max_length=50)

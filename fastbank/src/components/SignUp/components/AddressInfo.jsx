@@ -21,16 +21,18 @@ function AddressInfo({ formData, setFormData }) {
         if (cep.length <= 0) {
             setFormData({ ...formData, logradouro: '', uf: '', bairro: '', cidade: '', numero: '', complemento: '' })
         }
-
+        
     }, [cep])
-
-
+    
+    
     const consumirAPI = () => {
         axios.get(`https://viacep.com.br/ws/${cep}/json/`)
             .then(({ data }) => {
                 setFormData({ ...formData, cep: data.cep, logradouro: data.logradouro, uf: data.uf, bairro: data.bairro, cidade: data.localidade })
                 console.log(data);
                 console.log(formData);
+            }).catch(() => {
+                setFormData({ ...formData, logradouro: '', uf: '', bairro: '', cidade: '', numero: '', complemento: '' })
             })
     }
 
@@ -40,7 +42,7 @@ function AddressInfo({ formData, setFormData }) {
                 sign="up"
                 tipo={'num'}
                 texto={'Zip Code...'}
-                maxLength={8}
+                maxLength={9}
                 required
                 valuei={formData.cep}
                 act={

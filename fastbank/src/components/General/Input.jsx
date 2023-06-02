@@ -31,14 +31,31 @@ const Input = ({ texto, tipo, obrigatorio, maxLength, act, valuei, sign }) => {
       if (value.length > 0 && !value.includes("@")) {
         setErrorMsg("Invalid Email");
       }
-
-      // if (!value.includes("gmail" || "yahoo" || ".com" || ".org" || ".edu" || "outlook")) {
-      //   setErrorMsg("Invalid Email");
-      // }
       else {
         setErrorMsg("");
       }
     }
+    else if (tipo == 'senha') {
+      const { value } = event.target;
+      const regexNumber = /\d/;
+      const regexSpecialChar = /[!@#$%^&*(),.?":{}|<>]/;
+      const regexUppercase = /[A-Z]/;
+      const regexLowercase = /[a-z]/;
+    
+      if (
+        value.length < 1 ||
+        !regexNumber.test(value) ||
+        !regexSpecialChar.test(value) ||
+        !regexUppercase.test(value) ||
+        !regexLowercase.test(value)
+      ) {
+        setErrorMsg("A senha deve conter pelo menos um número, um caractere especial, uma letra maiúscula e uma letra minúscula.");
+      } else {
+        setErrorMsg("");
+      }
+    }
+
+
     else {
       setInputValue(event.target.value);
     }

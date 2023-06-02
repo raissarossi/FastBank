@@ -36,7 +36,11 @@ function PPInfo({ formData, setFormData }) {
         }
         setFormData({ ...formData, rg: rg })
     }, [rg])
-
+    
+    const [senha, setSenha] = useState(formData.rg)
+    useEffect(()=>{
+        console.log(formData.senha);
+    },[formData.senha])
     return (
         <div className='forms'>
             <Input
@@ -65,12 +69,15 @@ function PPInfo({ formData, setFormData }) {
 
             <Input
                 sign="up"
-                tipo={'password'}
+                tipo={'senha'}
                 texto={'Password...'}
                 maxLength={20}
                 required
                 valuei={formData.senha}
-                act={(event) => setFormData({ ...formData, senha: event.target.value })} />
+                act={(event) => {
+                    setFormData({ ...formData, senha: event.target.value });
+                    setSenha(event.target.value)
+                }}/>
 
             {/* <Input
                 tipo={'password'}

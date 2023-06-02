@@ -109,15 +109,16 @@ function Form() {
       return formData.nome && formData.dataNascimento;
     }
     else if (page === 3) {
-      if (formData.cep.length == 9) {
+      if (formData.cep.length == 9 || formData.cep.length == 8) {
         return formData.logradouro && formData.bairro && formData.cidade && formData.uf && formData.cep && formData.numero && formData.complemento;
       }
     }
     else if (page === 4) {
-      if (formData.telefone.length == 14 && (/^\S+$/.test(formData.email) || formData.email == "")) {
-        return formData.telefone || formData.email;
-      }
-      else if (formData.telefone == "" && (/^\S+$/.test(formData.email)) && formData.email.includes("@")) {
+      // if (formData.telefone.length == 14 && (/^\S+$/.test(formData.email) || formData.email == "")) {
+      //   return formData.telefone || formData.email;
+      // }
+      // else 
+      if (formData.telefone.length == 14 && (/^\S+$/.test(formData.email)) && formData.email.includes("@")) {
         return formData.telefone || formData.email;
       }
     }

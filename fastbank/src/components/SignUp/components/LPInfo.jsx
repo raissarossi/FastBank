@@ -17,6 +17,7 @@ function LPInfo({ formData, setFormData }) {
         }
         setFormData({ ...formData, cpf_cnpj: cnpj })
     }, [cnpj])
+    
 
     return (
         <div id='other-info-container' className='forms'>
