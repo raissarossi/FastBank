@@ -15,11 +15,11 @@ class CustomAuthenticationBackend(ModelBackend):
         if user.check_password(password):
             # A senha está correta. Reinicie a contagem de tentativas.
             user.failed_login_attempts_count = 0
-            if not user.is_active and user.blocked_at:
+            if not user.is_active and user.is_staff:
                 reactivation_period = timedelta(minutes=1)
-                if timezone.now() - user.blocked_at > reactivation_period:
+                if timezone.now() - user.is_staff > reactivation_period:
                     user.is_active = True
-                    user.blocked_at = None
+                    user.is_staff = None
 
 
             user.save()
@@ -32,7 +32,7 @@ class CustomAuthenticationBackend(ModelBackend):
             # Verifique se a conta deve ser bloqueada.
             if user.failed_login_attempts_count >= 3:
                 user.is_active = False
-                user.blocked_at = timezone.now()
+                user.is_staff = True
                 user.save()
             
             return None

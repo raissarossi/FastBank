@@ -43,7 +43,7 @@ class CustomUserManager(BaseUserManager):
         """
         Cria e salva um superusuário com o CPF_CNPJ e senha fornecidos.
         """
-        extra_fields.setdefault('is_staff', True)
+        # extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
         return self.create_user(CPF_CNPJ, password, **extra_fields)
 
@@ -60,6 +60,7 @@ class Cliente(AbstractUser):
     REQUIRED_FIELDS = ['nome', 'data_nascimento', 'telefone', 'email', 'observacao', 'logradouro', 'bairro', 'cidade', 'uf', 'cep', 'complemento', 'type_person', 'password',]
 
     is_active = models.BooleanField(default=True)
+    # blocked_at = models.DateTimeField(default=False)
     is_staff = models.BooleanField(default=False)
     objects = CustomUserManager()
     username = None
@@ -79,7 +80,6 @@ class Cliente(AbstractUser):
     cep = models.CharField(max_length=10)
     complemento = models.CharField(max_length=100)
     type_person = models.CharField(max_length=1, choices=TYPES)
-    blocked_at = models.DateTimeField(null=True)
    
     def __str__(self) -> str:
         return self.nome
