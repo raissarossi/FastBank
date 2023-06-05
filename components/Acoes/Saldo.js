@@ -28,6 +28,7 @@ const Saldo = ({ corText, tema, saldo }) => {
                     {!showSaldo && <View className={`h-7 w-20 ${bg} rounded-md mr-2`} />}
                     {showSaldo && (
                         <Icon name="eye" size={18} className={corText} onPress={() => setShowSaldo(!showSaldo)} />
+                    
                     )}
                     {!showSaldo && (
                         <Icon name="eye-off" size={18} className={corText} onPress={() => setShowSaldo(!showSaldo)} />
