@@ -168,6 +168,9 @@ class InvestimentoListarDetalhar(viewsets.ModelViewSet):
     # permission_classes = (IsAuthenticated,)
     queryset = Investimento.objects.all()
     serializer_class = InvestimentoSerializer
+    def list(self, request, *args, **kwargs):
+        print('BACKENCERTO AEAEAEAEAEAE')
+        return super().list(request, *args, **kwargs)
 
 class EmprestimoListarDetalhar(viewsets.ModelViewSet):
     # permission_classes = (IsAuthenticated,)
