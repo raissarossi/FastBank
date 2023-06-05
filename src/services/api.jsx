@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://fastbank-rai.azurewebsites.net/",
+  baseURL: "https://rai-fastbank.azurewebsites.net/",
 });
 
 export default api;
