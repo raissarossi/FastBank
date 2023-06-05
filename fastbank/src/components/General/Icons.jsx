@@ -57,29 +57,29 @@ const Icons = ({ icon }) => {
   // ICONS FOOTER ---light
   if (icon == "gitLight") {
     return (
-      <div>
-        <img src={gitIconLight} className='flex dark:hidden w-full mb-5 sm:mb-8' />
+      <div className='flex justify-center items-center'>
+        <img src={gitIconLight} className='flex dark:hidden w-12 h-12' />
       </div>
     );
   }
   if (icon == "figmaLight") {
     return (
-      <div>
-        <img src={figmaIconLight} className='flex dark:hidden w-full mb-5 sm:mb-8' />
+      <div className='flex justify-center items-center'>
+        <img src={figmaIconLight} className='flex dark:hidden mx-2 w-8 h-12' />
       </div>
     );
   }
   if (icon == "azureLight") {
     return (
-      <div>
-        <img src={azureIconLight} className='flex dark:hidden w-full mb-5 sm:mb-8' />
+      <div className='flex justify-center items-center'>
+        <img src={azureIconLight} className='flex dark:hidden w-12 h-12' />
       </div>
     );
   }
   if (icon == "vercelLight") {
     return (
-      <div>
-        <img src={vercelIconLight} className='flex dark:hidden w-full mb-5 sm:mb-8' />
+      <div className='flex justify-center items-center'>
+        <img src={vercelIconLight} className='flex dark:hidden w-12 h-12' />
       </div>
     );
   }
@@ -88,29 +88,29 @@ const Icons = ({ icon }) => {
   // ICONS FOOTER ---dark
   if (icon == "gitDark") {
     return (
-      <div>
-        <img src={gitIconDark} className='flex dark:hidden w-full mb-5 sm:mb-8' />
+      <div className='flex justify-center items-center'>
+        <img src={gitIconDark} className='hidden dark:flex w-12 h-12' />
       </div>
     );
   }
   if (icon == "figmaDark") {
     return (
-      <div>
-        <img src={figmaIconDark} className='flex dark:hidden w-full mb-5 sm:mb-8' />
+      <div className='flex justify-center items-center'>
+        <img src={figmaIconDark} className='hidden dark:flex px-1 w-8 h-12' />
       </div>
     );
   }
   if (icon == "azureDark") {
     return (
-      <div>
-        <img src={azureIconDark} className='flex dark:hidden w-full mb-5 sm:mb-8' />
+      <div className='flex justify-center items-center'>
+        <img src={azureIconDark} className='hidden dark:flex w-12 h-12' />
       </div>
     );
   }
   if (icon == "vercelDark") {
     return (
-      <div>
-        <img src={vercelIconDark} className='flex dark:hidden w-full mb-5 sm:mb-8' />
+      <div className='flex justify-center items-center'>
+        <img src={vercelIconDark} className='hidden dark:flex w-12 h-12' />
       </div>
     );
   }
