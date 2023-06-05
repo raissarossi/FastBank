@@ -52,10 +52,10 @@ class ClienteListarDetalhar(viewsets.ModelViewSet):
 
         _mutable = request.data._mutable
         # set to mutable
-        request.data._mutable = True
+        request.POST._mutable = True
         request.data['CPF_CNPJ'] = CPF_CNPJ
-        request.data._mutable = False
-        request.data._mutable = _mutable
+        request.POST._mutable = False
+        request.POST._mutable = _mutable
         return super().create(request, *args, **kwargs)
 
 class ClientePFListarDetalhar(viewsets.ModelViewSet):
@@ -143,13 +143,13 @@ class MovimentacaoListarDetalhar(viewsets.ModelViewSet):
         _mutable = request.data._mutable
 
         # set to mutable
-        request.data._mutable = True
+        request.POST._mutable = True
         request.data['remetente'] = contaRemetenteId
         request.data['remetenteNome'] = conta_remetente.cliente.nome
         request.data['destinatario'] = conta_destinatario.id
         request.data['destinatarioNome'] = destinatario.nome
-        request.data._mutable = False
-        request.data._mutable = _mutable
+        request.POST._mutable = False
+        request.POST._mutable = _mutable
         # print("EESSEE :"+request.data['contaDestinatario']+" : "+contaRemetenteId)
 
         
@@ -198,12 +198,12 @@ class EmprestimoListarDetalhar(viewsets.ModelViewSet):
 
         _mutable = request.data._mutable
 
-        request.data._mutable = True
+        request.POST._mutable = True
         request.data['valor'] = valorEmprestimo
         request.data['juros'] = juros
         request.data['valorPagar'] = valorPagar
         request.data['aprovado'] = aprovado
-        request.data._mutable = _mutable
+        request.POST._mutable = _mutable
 
         return super().create(request, *args, **kwargs)
     
