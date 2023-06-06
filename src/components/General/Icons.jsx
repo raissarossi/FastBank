@@ -96,7 +96,7 @@ const Icons = ({ icon }) => {
   if (icon == "figmaDark") {
     return (
       <div className='flex justify-center items-center'>
-        <img src={figmaIconDark} className='hidden dark:flex px-1 w-8 h-12' />
+        <img src={figmaIconDark} className='hidden dark:flex mx-2 w-8 h-12' />
       </div>
     );
   }
