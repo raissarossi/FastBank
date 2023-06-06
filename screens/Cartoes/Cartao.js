@@ -1,5 +1,5 @@
 import { View, Text, Image } from "react-native"
-const Cartao = ({ tipo }) => {
+const Cartao = ({ tipo, num, key }) => {
     return (
         <View className="w-full justify-center items-center">
             <>
@@ -7,7 +7,10 @@ const Cartao = ({ tipo }) => {
                 <Image source={require('../../components/img/CartaoD.png')} className={"w-[300px] h-48 top-1 z-0"} />
                 : tipo == "c" ?
                 <Image source={require('../../components/img/CartaoC.png')} className={"w-[300px] h-48 top-1 z-0"} />
-                : <></>}
+                : tipo == "b" ?
+                <Image source={require('../../components/img/CartaoC.png')} className={"w-[300px] h-48 top-1 z-0"} />
+                :
+                <></>}
             </>
 
             <View className='absolute z-10 w-[280px] h-40 flex justify-between p-3'>
@@ -17,10 +20,9 @@ const Cartao = ({ tipo }) => {
                 <Text className="text-white pl-1 text-base font-extralight">Debito</Text>
                 : tipo == "c" ?
                 <Text className="text-white pl-1 text-base font-extralight">Credito</Text>
+                : tipo == "b" ?
+                <Text className="text-white pl-1 text-base font-extralight">Crebito</Text>
                 : <></>}
-                    
-                    {/* <Text className="text-white">aaaaaaa</Text> */}
-                    {/* <Text className="text-white">aaaaaaa</Text> */}
                 </View>
                 <View className='z-20'>
                     <Text className="text-white pl-1 text-sm font-thin">Raissa Rossi</Text>

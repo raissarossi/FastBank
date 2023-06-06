@@ -13,6 +13,7 @@ const SolicitarCartao = ({ navigation }) => {
     const [formCard, setFormCard] = useState({
         cartaoD: false,
         cartaoC: false,
+        cartaoB: false,
     })
 
     const PageDisplay = () => {
@@ -34,7 +35,7 @@ const CheckInput = () => {
         return true
     }
     if (page === 1){
-        if(formCard.cartaoD==true || formCard.cartaoC==true){
+        if(formCard.cartaoD==true || formCard.cartaoC==true || formCard.cartaoB){
             return true
         }
     }

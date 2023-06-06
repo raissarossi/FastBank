@@ -23,7 +23,7 @@ const Step2 = ({ formCard, setFormCard, navigation }) => {
     }, [])
 
     return (
-        <View className="bg-blue-600 h-full w-full flex items-center">
+        <View className="h-full w-full flex items-center">
             <Text className="w-4/5 pt-1">Request {cartaoSolicitado} card</Text>
             <Text className="w-4/5 pt-3">Request date: {formattedCurrentDate}</Text>
             <Text className="w-4/5 pt-3">Val. {formattedFutureDate}</Text>
