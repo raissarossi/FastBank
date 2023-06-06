@@ -65,6 +65,7 @@ const TelaValor = ({ navigation, route }) => {
         }}
         ).then(()=>{
             alert("transferencia feita com sucesso!")
+            navigation.navigate('TelaEndTransf', { result: false })
         })
     }
     return (
