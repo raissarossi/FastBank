@@ -35,7 +35,7 @@ const Input = ({ texto, tipo, obrigatorio, maxLength, act, valuei, sign }) => {
         setErrorMsg("");
       }
     }
-    else if (tipo == 'senha') {
+    else if (tipo == 'password') {
       const { value } = event.target;
       const regexNumber = /\d/;
       const regexSpecialChar = /[!@#$%^&*(),.?":{}|<>]/;
