@@ -66,7 +66,7 @@ function PPInfo({ formData, setFormData }) {
 
             <Input
                 sign="up"
-                tipo={'senha'}
+                tipo={'password'}
                 texto={'Password...'}
                 maxLength={20}
                 required
