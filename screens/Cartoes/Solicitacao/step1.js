@@ -29,9 +29,9 @@ const Step1 = ({ formCard, setFormCard }) => {
                 <Text className="text-lg pl-1">Credit Card</Text>
             </View>
             <View className="w-4/5 flex flex-row mt-10 items-center">
-                <CheckBox value={formCard.cartaoC} onValueChange={setSelectionCrebito} className="flex items-center justify-center"
+                <CheckBox value={formCard.cartaoB} onValueChange={setSelectionCrebito} className="flex items-center justify-center"
                 />
-                <Text className="text-lg pl-1">Credit Card</Text>
+                <Text className="text-lg pl-1">Crebit Card</Text>
             </View>
         </View>
     );

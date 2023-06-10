@@ -20,6 +20,15 @@ const Step2 = ({ formCard, setFormCard, navigation }) => {
         if (formCard.cartaoD == true && formCard.cartaoC == true) {
             setCartaoSolicitado("Debit and Credit")
         }
+        if (formCard.cartaoD == true && formCard.cartaoB == true) {
+            setCartaoSolicitado("Debit and Crebit")
+        }
+        if (formCard.cartaoC == true && formCard.cartaoB == true) {
+            setCartaoSolicitado("Credit and Crebit")
+        }
+        if (formCard.cartaoB == true && formCard.cartaoC == true && formCard.cartaoB == true) {
+            setCartaoSolicitado("Debit, Credit and Crebit")
+        }
     }, [])
 
     return (

@@ -4,40 +4,41 @@ import { useEffect, useState } from "react";
 import Step0 from "./Solicitacao/step0";
 import Step1 from "./Solicitacao/step1";
 import Step2 from "./Solicitacao/step2";
-import Step3 from "./Solicitacao/step3";
 import { useSession } from "../../components/services/ApiToken";
 import api from "../../components/services/api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import StatusEmprestimo from "./StatusEmprestimo";
 
-const SolicitarCartao = ({ navigation }) => {
+const Emprestimo = ({ navigation }) => {
     const { user } = useSession(navigation)
     const [page, setPage] = useState(0)
     const [token, setToken] = useState('')
-    
-    const FormTitles = ['Request your new card right now...', 'Which card do you want?', 'Are you sure about this action?', 'Ready... in a few days, your card will be in your hand!'];
 
-    const [formCard, setFormCard] = useState({
-        cartaoD: false,
-        cartaoC: false,
-        cartaoB: false,
+    const FormTitles = ['Request your loan right now...', 'How much do you want?', 'Are you sure about this action?'];
+
+    // 'Ready... the money is already in your account!'
+
+    const [formEmprestimo, setFormEmprestimo] = useState({
+        conta: user.id,
+        valor: 0,
+        juros: '',
+        valorPagar: '',
+        aprovado: false
     })
 
-    useEffect(()=>{
-        AsyncStorage.getItem("dados").then((res)=>{setToken(JSON.parse(res).access)})  
-    },[])
+    useEffect(() => {
+        AsyncStorage.getItem("dados").then((res) => { setToken(JSON.parse(res).access) })
+    }, [])
 
     const PageDisplay = () => {
         if (page === 0) {
             return <Step0 />
         }
         else if (page === 1) {
-            return <Step1 formCard={formCard} setFormCard={setFormCard} />
+            return <Step1 formEmprestimo={formEmprestimo} setFormEmprestimo={setFormEmprestimo} />
         }
         else if (page === 2) {
-            return <Step2 formCard={formCard} setFormCard={setFormCard} />
-        }
-        else if (page === 3) {
-            return <Step3 />
+            return <Step2 formEmprestimo={formEmprestimo} setFormEmprestimo={setFormEmprestimo} />
         }
     }
     const CheckInput = () => {
@@ -45,14 +46,9 @@ const SolicitarCartao = ({ navigation }) => {
             return true
         }
         if (page === 1) {
-            if (formCard.cartaoD == true || formCard.cartaoC == true || formCard.cartaoB) {
-                return true
-            }
-        }
-        if (page === 2) {
             return true
         }
-        if (page === 3) {
+        if (page === 2) {
             return true
         }
         return false
@@ -63,30 +59,20 @@ const SolicitarCartao = ({ navigation }) => {
 
     const sendCardToAPI = (tipo) => {
         api.post(
-            'bank/cartoes/',
+            'bank/emprestimo/',
             {
-              conta: user.id,
-              tipo: tipo,
-              numero: "",
-              bandeira: ""
+                conta: null,
+                valor: null,
+                juros: null,
+                valorPagar: null,
+                aprovado: false
             },
             {
-              headers: {Authorization: 'JWT ' + token}
+                headers: { Authorization: 'JWT ' + token }
             }
-          );
+        );
     };
 
-    const SendCards = () => {
-        if (formCard.cartaoD) {
-          sendCardToAPI("Debit Card");
-        }
-        if (formCard.cartaoC) {
-          sendCardToAPI("Credit Card");
-        }
-        if (formCard.cartaoB) {
-          sendCardToAPI("Crebit Card");
-        }
-      };
 
     return (
         <View className="w-full h-full">
@@ -97,21 +83,20 @@ const SolicitarCartao = ({ navigation }) => {
             <View id='body' className="w-full h-3/6">
                 {PageDisplay()}
             </View>
-            <View className="w-full h-2/6 bottom-0 flex items-end">
-                <Pressable disabled={isNextDisabled} className={`w-2/6 h-12 m-5 rounded-2xl flex items-center justify-center ${isNextDisabled ? "bg-dark-grey1" : "bg-black"}`} onPress={() => {
+            <View className="w-full h-2/6 bottom-0 flex items-center">
+                <Pressable disabled={isNextDisabled} className={`bg-black w-4/5 h-10 flex items-center justify-center rounded-full ${isNextDisabled ? "bg-dark-grey1" : "bg-black"}`} onPress={() => {
                     if (page == FormTitles.length - 1) {
-                        navigation.navigate('Start')
+                        <StatusEmprestimo formEmprestimo={formEmprestimo} setFormEmprestimo={setFormEmprestimo} />
                     }
 
                     else {
                         setPage((currPage) => currPage + 1)
                         if (page === 2) {
-                            SendCards()
                         }
                     }
                 }}>
                     <Text className="text-white">
-                        {page === FormTitles.length - 1 ? "EXIT" : "NEXT"}
+                        {page === FormTitles.length - 1 ? "REQUEST" : "NEXT"}
                     </Text>
                 </Pressable>
             </View>
@@ -119,4 +104,4 @@ const SolicitarCartao = ({ navigation }) => {
     );
 }
 
-export default SolicitarCartao
+export default Emprestimo

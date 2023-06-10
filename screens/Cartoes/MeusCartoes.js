@@ -47,11 +47,15 @@ const MeusCartoes = ({ navigation }) => {
                 </Pressable>
             </View>
             {cartoes.map((cartao) =>
-            <View>
-                {cartao.conta == user.conta.id ?
-                    <Cartao key={cartao.id} tipo={cartao.tipo} num={cartao.numero} /> : <View>{cartao.conta} != {user.conta.id}</View>
-                }
-            </View>)
+                <View>
+                    {cartao.conta == user.conta.id ?
+                        <>
+                            <Cartao key={cartao.id} tipo={cartao.tipo} num={cartao.numero} nome={user.nome}/>
+                        </> :
+                        <Text>2</Text>
+                        /* <Text>{cartao.conta} != {user.conta.id}</Text> */
+                    }
+                </View>)
             }
         </View>
     );

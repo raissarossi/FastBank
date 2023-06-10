@@ -24,8 +24,6 @@ const TelaValor = ({ navigation, route }) => {
 
     useEffect(()=>{
         AsyncStorage.getItem("dados").then((res)=>{setToken(JSON.parse(res).access)})
-        
-        
     },[])
     useEffect(()=>{
         setMov({ ...mov, conta: user.id })
@@ -51,11 +49,11 @@ const TelaValor = ({ navigation, route }) => {
         console.log(user);
         console.log(mov);
         if (mov.valor <= 0){
-            alert("O valor transferido deve ser maior do que 0")
+            alert("The amount transferred must be greater than 0")
             return
         }
         if (mov.descricao.length <= 0){
-            alert("É Necessario ter uma descrição para realizar a transferencia")
+            alert("It is necessary to have a description to carry out the transfer")
             return
         }
         
@@ -64,7 +62,7 @@ const TelaValor = ({ navigation, route }) => {
             Authorization: 'JWT '+ token
         }}
         ).then(()=>{
-            alert("transferencia feita com sucesso!")
+            alert("Successful transfer!")
             navigation.navigate('TelaEndTransf', { result: false })
         })
     }

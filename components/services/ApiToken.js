@@ -8,7 +8,7 @@ import Verificacao from "./verificacao";
 export function useSession(navigation) {
     
     const [user, setUser] = useState({
-        nome_cliente: "Loading...",
+        nome: "Loading...",
         conta: { 
             saldo: "Loading..."
         }
