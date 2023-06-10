@@ -23,6 +23,7 @@ const Step1 = ({ formEmprestimo, setFormEmprestimo, navigation }) => {
         }
         setFormEmprestimo({...formEmprestimo, valor: valor});
     }, [valor])
+
     return (
         <View className="h-full w-full flex items-center">
             <View className="flex justify-between items-center w-full h-1/3 py-5">

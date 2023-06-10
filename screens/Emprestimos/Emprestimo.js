@@ -1,20 +1,21 @@
-import { Pressable, View, Text } from "react-native";
+import { Pressable, View, Text, Image } from "react-native";
 import Navbar from "../../components/Navbar/Navbar";
 import { useEffect, useState } from "react";
 import Step0 from "./Solicitacao/step0";
 import Step1 from "./Solicitacao/step1";
 import Step2 from "./Solicitacao/step2";
+import StatusEmprestimo from "./StatusEmprestimo"
 import { useSession } from "../../components/services/ApiToken";
 import api from "../../components/services/api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import StatusEmprestimo from "./StatusEmprestimo";
 
 const Emprestimo = ({ navigation }) => {
     const { user } = useSession(navigation)
     const [page, setPage] = useState(0)
     const [token, setToken] = useState('')
+    const [aprovado, setAprovado] = useState(false)
 
-    const FormTitles = ['Request your loan right now...', 'How much do you want?', 'Are you sure about this action?'];
+    const FormTitles = ['Request your loan right now...', 'How much do you want?', 'Are you sure about this action?', 'foi'];
 
     // 'Ready... the money is already in your account!'
 
@@ -40,6 +41,25 @@ const Emprestimo = ({ navigation }) => {
         else if (page === 2) {
             return <Step2 formEmprestimo={formEmprestimo} setFormEmprestimo={setFormEmprestimo} />
         }
+        else if (page === 3 ){
+            if (aprovado === false) {
+                return (
+                    <View>
+                        <Text></Text>
+                        <View className="h-full w-full flex justify-center items-center">
+                            <Image source={require('../../components/img/People/HappyMen.png')} className='w-full h-full' />
+                        </View>
+                    </View>
+                )
+            }
+            else if (aprovado === true) {
+                return (
+                    <View className="h-full w-full flex justify-center items-center">
+                        <Image source={require('../../components/img/People/HappyMen.png')} className='w-full h-full' />
+                    </View>
+                )
+            }
+        }
     }
     const CheckInput = () => {
         if (page === 0) {
@@ -51,26 +71,29 @@ const Emprestimo = ({ navigation }) => {
         if (page === 2) {
             return true
         }
+        if (page === 3) {
+            return true
+        }
         return false
 
     }
     const isNextDisabled = !CheckInput()
 
 
-    const sendCardToAPI = (tipo) => {
+    const sendEmprestimoToAPI = (tipo) => {
         api.post(
             'bank/emprestimo/',
             {
-                conta: null,
-                valor: null,
-                juros: null,
-                valorPagar: null,
-                aprovado: false
+                conta: user.id,
+                valor: formEmprestimo.valor,
             },
             {
                 headers: { Authorization: 'JWT ' + token }
             }
-        );
+        ).then((res) => {
+            console.log(res);
+            setAprovado(res.data.aprovado)
+        })
     };
 
 
@@ -84,19 +107,18 @@ const Emprestimo = ({ navigation }) => {
                 {PageDisplay()}
             </View>
             <View className="w-full h-2/6 bottom-0 flex items-center">
-                <Pressable disabled={isNextDisabled} className={`bg-black w-4/5 h-10 flex items-center justify-center rounded-full ${isNextDisabled ? "bg-dark-grey1" : "bg-black"}`} onPress={() => {
-                    if (page == FormTitles.length - 1) {
-                        <StatusEmprestimo formEmprestimo={formEmprestimo} setFormEmprestimo={setFormEmprestimo} />
-                    }
-
-                    else {
-                        setPage((currPage) => currPage + 1)
-                        if (page === 2) {
-                        }
-                    }
-                }}>
+                <Pressable disabled={isNextDisabled} className={`bg-black w-4/5 h-10 flex items-center justify-center rounded-full ${isNextDisabled ? "bg-dark-grey1" : "bg-black"}`}
+                    onPress={() => {
+                            setPage((currPage) => currPage + 1)
+                            if (page === 2){
+                                sendEmprestimoToAPI()
+                            }
+                            if (page === 3){
+                                navigation.navigate('Home')
+                            }
+                    }}>
                     <Text className="text-white">
-                        {page === FormTitles.length - 1 ? "REQUEST" : "NEXT"}
+                        {page === 2 ? "REQUEST" : page === 3 ? "EXIT" : "NEXT"}
                     </Text>
                 </Pressable>
             </View>

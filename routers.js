@@ -22,15 +22,6 @@ export default function Routers() {
         <NavigationContainer>
             <Pilha.Navigator screenOptions={{ headerShown: false }}>
                 <Pilha.Screen
-                    name="StatusEmprestimo"
-                    component={StatusEmprestimo}
-                />
-                <Pilha.Screen
-                    name="Emprestimo"
-                    component={Emprestimo}
-                />
-
-                <Pilha.Screen
                     name="Start"
                     component={Start}
                 />
@@ -73,6 +64,11 @@ export default function Routers() {
                     component={SolicitarCartao}
                 />
 
+
+                <Pilha.Screen
+                    name="Emprestimo"
+                    component={Emprestimo}
+                />
             </Pilha.Navigator>
         </NavigationContainer>
     )

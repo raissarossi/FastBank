@@ -21,7 +21,7 @@ export default function Start({ navigation }) {
                 <View className={'w-full h-2/5 flex justify-end'}>
 
                     <View className={"pr-4 pl-4 w-full flex justify-around"}>
-                        <View className={'ss:mb-9'}>
+                        {/* <View className={'ss:mb-9'}>
                             <View className={'flex flex-row justify-between pb-4 pt-7 items-center'}>
                                 <Text>Name</Text>
                                 <Icons iconName={"keyboard-arrow-down"} collection={MaterialIcons} color={"black"} size={24} classN={"p-9"} />
@@ -30,7 +30,7 @@ export default function Start({ navigation }) {
                                 <Text>Agency: </Text>
                                 <Text>Account: </Text>
                             </View>
-                        </View>
+                        </View> */}
 
                         <View className={'flex items-center flex-row justify-evenly'}>
                             <Pressable onPress={() => navigation.navigate('Home')} className={'bg-black w-1/4 h-12 rounded-full flex justify-center items-center'}>
