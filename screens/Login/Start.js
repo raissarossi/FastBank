@@ -3,10 +3,11 @@ import { Text, Button, Image, Pressable, TextInput, View } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import Icons from '../../components/Icons/Icons';
+import CreateAccount from '../../components/General/CreateAccount';
 
 export default function Start({ navigation }) {
 
-    const btAccess = () =>{
+    const btAccess = () => {
         navigation.navigate('Home')
     }
     return (
@@ -32,23 +33,25 @@ export default function Start({ navigation }) {
                             </View>
                         </View> */}
 
-                        <View className={'flex items-center flex-row justify-evenly'}>
-                            <Pressable onPress={() => navigation.navigate('Home')} className={'bg-black w-1/4 h-12 rounded-full flex justify-center items-center'}>
+                        <View className={'flex items-center flex-col justify-evenly'}>
+                            <Pressable onPress={() => navigation.navigate('Home')} className={'bg-black w-4/6 h-12 mb-3 rounded-full flex justify-center items-center'}>
                                 <Text className={'text-white'}>Access</Text>
                             </Pressable>
+
+                            <CreateAccount />
                         </View>
                     </View>
 
                     <View className={'bg-black w-full mt-4'}>
                         <View className={'flex justify-around flex-row m-3'}>
                             <View className={'border-2 border-white rounded-lg'}>
-                                <Pressable title='key' onPress={() => navigation.navigate('Transferencias', { title: 'Security Key' })} >
+                                <Pressable title='key' onPress={() => navigation.navigate('weareworking', { title: 'Security Key' })} >
                                     <Icons iconName={"lock-closed-outline"} collection={Ionicons} color="white" size={24} classN={"p-9"} />
                                 </Pressable>
                             </View>
 
                             <View className={'border-2 border-white  rounded-lg'}>
-                                <Pressable onPress={() => navigation.navigate('Transferencias', { title: 'Bar Code' })} >
+                                <Pressable onPress={() => navigation.navigate('weareworking', { title: 'Bar Code' })} >
                                     <Icons iconName={"ios-barcode-outline"} collection={Ionicons} color="white" size={24} classN={"p-9"} />
                                 </Pressable>
                             </View>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, Button, Image, TouchableOpacity, TextInput, View, Switch } from 'react-native';
+import { Text, Button, Image, TouchableOpacity, TextInput, View, Switch, Linking } from 'react-native';
 import { styled } from 'nativewind';
 import Navbar from '../../components/Navbar/Navbar';
 import AcoesBtn from "../../components/Acoes/AcoesBtn"
@@ -24,7 +24,7 @@ export default function Home({ navigation }) {
                     <View className="-ml-5">
                         <Saldo corText={"text-white"} tema={"black"} saldo={user.conta.saldo}/>
                     </View>
-                    <TouchableOpacity onPress={() => navigation.navigate('Start')}>
+                    <TouchableOpacity onPress={() => Linking.openURL("https://fastbank-rai.vercel.app/")}>
                         <Text className={'text-white'}>See statement</Text>
                     </TouchableOpacity>
                 </View>

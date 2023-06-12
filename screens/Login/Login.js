@@ -4,6 +4,7 @@ import { useContext, useState } from "react";
 import api from "../../components/services/api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Inputt from "../../components/General/Input";
+import CreateAccount from "../../components/General/CreateAccount";
 // import SimpleSelectButton from 'react-native-simple-select-button';
 // import { Ionicons } from '@expo/vector-icons';
 // import { Context } from "../../components/services/globalContext";
@@ -57,6 +58,7 @@ const Login = ({ navigation }) => {
                 <Pressable onPress={logar} className={'bg-black w-2/4 h-12 rounded-full flex justify-center items-center'}>
                     <Text className={'text-white'}>Enter</Text>
                 </Pressable>
+                <CreateAccount />
             </View>
 
         </View>

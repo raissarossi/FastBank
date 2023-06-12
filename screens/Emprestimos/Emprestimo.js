@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Step0 from "./Solicitacao/step0";
 import Step1 from "./Solicitacao/step1";
 import Step2 from "./Solicitacao/step2";
-import StatusEmprestimo from "./StatusEmprestimo"
 import { useSession } from "../../components/services/ApiToken";
 import api from "../../components/services/api";
 import AsyncStorage from "@react-native-async-storage/async-storage";

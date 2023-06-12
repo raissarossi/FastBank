@@ -1,4 +1,4 @@
-import { Touchable } from "react-native";
+import { Image, Touchable } from "react-native";
 import { View } from "react-native";
 import { TouchableOpacity } from 'react-native';
 import Btns from "./Btns";
@@ -16,57 +16,39 @@ const AcoesBtn = () => {
             <Btns icon={
                 <Ionicons name="card-outline" size={24} color="black" />
             }
-                pagina={() => navigation.navigate('MeusCartoes', { title: 'PIX' })}>
-                
+                pagina={() => navigation.navigate('MeusCartoes', { title: 'CARDS' })}>
             </Btns>
-
-
-
-            <Btns icon={
-                <Ionicons name="ios-barcode-outline" size={24} color="black" />
-            }
-                pagina={() => navigation.navigate('Transferencias', { title: 'BOLETO' })}>
-                
-            </Btns>
-
-
 
             <Btns icon={
                 <Feather name="refresh-ccw" size={24} color="black" />
             }
-                pagina={() => navigation.navigate('Transferencias', { title: 'TRANSFERENCIA' })}>
-                
+                pagina={() => navigation.navigate('Transferencias', { title: 'BOLETO' })}>
             </Btns>
-
-
-            
-            <Btns icon={
-                <Ionicons name="ios-trending-up-outline" size={24} color="black" />
-            }
-                pagina={() => navigation.navigate('Transferencias', { title: 'PIX' })}>
-                
-            </Btns>
-
-
 
             <Btns icon={
-                <Ionicons name="arrow-back" size={28} color="white" />
+                <Ionicons name="ios-barcode-outline" size={28} color="black" />
             }
-                pagina={() => navigation.navigate('Transferencias', { title: 'PIX' })}>
-                
+                pagina={() => navigation.navigate('weareworking', { title: 'PAYMENT' })}>
+
             </Btns>
 
-
-            
             <Btns icon={
-                <Ionicons name="arrow-back" size={28} color="white" />
+                <Image source={require('../../components/img/logoPixP.png')} className={'h-6 w-6'} />
             }
                 pagina={() => navigation.navigate('Transferencias', { title: 'PIX' })}>
-                
             </Btns>
 
+            <Btns icon={
+                <Ionicons name="ios-trending-up-outline" size={28} color="black" />
+            }
+                pagina={() => navigation.navigate('weareworking', { title: 'Transferencias' })}>
+            </Btns>
 
-
+            <Btns icon={
+                <Image source={require('../../components/img/coin.png')} className={'h-6 w-6'} />
+            }
+                pagina={() => navigation.navigate('Emprestimo', { title: 'LOAN' })}>
+            </Btns>
         </View>
 
     );

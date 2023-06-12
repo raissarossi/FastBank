@@ -11,7 +11,7 @@ import MeusCartoes from "./screens/Cartoes/MeusCartoes";
 import SolicitarCartao from "./screens/Cartoes/SolicitarCartao";
 import TelaEndTransf from "./screens/Transferencias/TelaEndTransf";
 import Emprestimo from "./screens/Emprestimos/Emprestimo";
-import StatusEmprestimo from "./screens/Emprestimos/StatusEmprestimo";
+import weAreWorking from "./screens/weAreWorking";
 
 
 const Pilha = createStackNavigator()
@@ -68,6 +68,12 @@ export default function Routers() {
                 <Pilha.Screen
                     name="Emprestimo"
                     component={Emprestimo}
+                />
+
+
+                <Pilha.Screen
+                    name="weareworking"
+                    component={weAreWorking}
                 />
             </Pilha.Navigator>
         </NavigationContainer>

@@ -14,7 +14,7 @@ const Cartao = ({ tipo, num, key, nome }) => {
                 : tipo == "c" || tipo == "Credit Card" ?
                 <Image source={require('../../components/img/CartaoC.png')} className={"w-[300px] h-48 top-1 z-0"} />
                 : tipo == "b" || tipo == "Crebit Card" ?
-                <Image source={require('../../components/img/CartaoD.png')} className={"w-[300px] h-48 top-1 z-0"} />
+                <Image source={require('../../components/img/CartaoB.png')} className={"w-[300px] h-48 top-1 z-0"} />
                 :
                 <></>}
             </>
