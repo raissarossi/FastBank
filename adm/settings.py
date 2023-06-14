@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-rik%c8%cw#z-)3fx@2+94idnbk^vdpv4@ff@qcl7b)32y9d2l&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["*", "https://fastbank-rai.vercel.app/"]
 
 AUTH_USER_MODEL = 'fastBank.Cliente'
 AUTHENTICATION_BACKENDS = [
@@ -69,8 +69,8 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
     'http://127.0.0.1:3000',
     'http://localhost:19006',
-    'http://127.0.0.1:19006',
-
+    'http://127.0.0.1:19006', 
+    "https://fastbank-rai.vercel.app/",
 ]
 ROOT_URLCONF = 'adm.urls'
 
