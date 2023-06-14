@@ -78,13 +78,13 @@ const SolicitarCartao = ({ navigation }) => {
 
     const SendCards = () => {
         if (formCard.cartaoD) {
-          sendCardToAPI("Debit Card");
+          sendCardToAPI("d");
         }
         if (formCard.cartaoC) {
-          sendCardToAPI("Credit Card");
+          sendCardToAPI("c");
         }
         if (formCard.cartaoB) {
-          sendCardToAPI("Crebit Card");
+          sendCardToAPI("b");
         }
       };
 

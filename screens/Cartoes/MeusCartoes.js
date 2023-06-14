@@ -19,7 +19,8 @@ const MeusCartoes = ({ navigation }) => {
         console.log(user);
     }, [user])
     useEffect(() => {
-        console.log('CARTAAAAAAAAAAAO  ' + cartoes.conta);
+        console.log('CARTAAAAAAAAAAAO  ');
+        console.log(cartoes.conta)
     }, [cartoes])
 
     useEffect(() => {
@@ -50,9 +51,11 @@ const MeusCartoes = ({ navigation }) => {
                 <View>
                     {cartao.conta == user.conta.id ?
                         <>
+                            <Text>1</Text>
                             <Cartao key={cartao.id} tipo={cartao.tipo} num={cartao.numero} nome={user.nome}/>
-                        </> :
-                        <Text>2</Text>
+                        </>
+                        :
+                        <></>
                         /* <Text>{cartao.conta} != {user.conta.id}</Text> */
                     }
                 </View>)
